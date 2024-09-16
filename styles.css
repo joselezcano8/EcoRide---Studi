@@ -1,12 +1,13 @@
 :root {
-/*     --clr-primary: #53736a;
-    --clr-clear: #f2f2f2;
-    --clr-dark: #404040;
-    --clr-dark-bg: #292222;
-    --clr-dark-op: #7e7e7e;
+    --clr-primary: #0D89D6;
+    --clr-secondary: #41D14D;
+    --clr-clear: #F2F2F2;
+    --clr-dark: #023859;
+    --clr-dark-bg: #192B38;
+    --clr-dark-op: #192b38c1;
 
-    --ff-primary: 'EB Garamond', serif;
-    --ff-secondary: 'Roboto', sans-serif; */
+    --ff-primary: 'Roboto', sans-serif;
+    --ff-secondary: 'Noto Sans', serif;
 
     --ff-body: var(--ff-secondary);
     --ff-heading: var(--ff-primary);
