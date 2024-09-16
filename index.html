@@ -18,9 +18,14 @@
     <!-- Section de la barre de navigation -->
     <nav class="nav padding">
         <a href="">
-            <img src="img/logo_primary.png" alt="Logo Eco Ride">
+            <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
         </a>
-        <ul>
+        <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <span>
+                <img src="img/icon-hamburger.svg" alt="">
+            </span>
+        </button>
+        <ul class="nav-links" id="nav-links">
             <a href="">Accueil</a>
             <a href="">Covoiturages</a>
             <a href="">Contact</a>
@@ -75,5 +80,6 @@
         <a href="">Mentions Legales</a>
     </footer>
     <script src="script-itineraire.js"></script>
+    <!-- <script src="modal.js"></script> -->
 </body>
 </html>
