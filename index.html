@@ -16,13 +16,14 @@
 </head>
 <body>
     <!-- Section de la barre de navigation -->
-    <nav class="nav padding">
+    <nav class="nav | padding">
         <a href="">
             <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
         </a>
-        <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+        <!-- Hamburguer Menu-->
+        <button class="mobile-open-modal">
             <span>
-                <img src="img/icon-hamburger.svg" alt="">
+                <img src="img/icon-hamburger.svg" alt="Open Menu">
             </span>
         </button>
         <ul class="nav-links" id="nav-links">
@@ -36,6 +37,22 @@
     <header class="header" style="background-image: url('img/car_road.jpg');width: 100wh; height: 450px; background-repeat: no-repeat">
         <h1 style="color: var(--clr-clear)">EcoRide</h1>
         <h3 style="color: var(--clr-clear)">Votre trajet, notre planète.</h3>
+        <!--Menu-->
+        <!--Overlay-->
+        <div class="overlay | hidden"></div>
+        <div class="menu | hidden">
+            <button>
+                <span class="mobile-close-modal">
+                     <img src="img/icon-close.svg" alt="Close Menu">
+                </span>
+            </button>
+            <ul class="mobile-nav-links">
+                <a href="">Accueil</a>
+                <a href="">Covoiturages</a>
+                <a href="">Contact</a>
+                <a href="">Connexion</a>
+            </ul>
+        </div>
     </header>
     <main>
         <!--Recherhce Itineraire-->
@@ -80,6 +97,6 @@
         <a href="">Mentions Legales</a>
     </footer>
     <script src="script-itineraire.js"></script>
-    <!-- <script src="modal.js"></script> -->
+    <script src="modal.js"></script>
 </body>
 </html>
