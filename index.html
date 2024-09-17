@@ -57,15 +57,11 @@
     <main class="main">
         <!--Recherhce Itineraire-->
         <form class="form" action="">
-            <div>
-                <input type="text" name="" id="depart-input" placeholder="Départ" class="depart">
-                <ul id="depart-suggestions" class="suggestions-list | hidden"></ul>
-            </div>
+            <input type="text" name="" id="depart-input" list="depart-suggestions" placeholder="Départ" class="depart">
+            <datalist id="depart-suggestions"></datalist>
 
-            <div>
-                <input type="text" name="" id="arrive-input" placeholder="Arrive" class="arrive">
-                <ul id="arrive-suggestions" class="suggestions-list | hidden"></ul>
-            </div>
+            <input type="text" name="" id="arrive-input" list="arrive-suggestions" placeholder="Arrive" class="arrive">
+            <datalist id="arrive-suggestions"></datalist>
 
             <input type="date" name="" id="" placeholder="Date" class="date">
 

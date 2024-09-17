@@ -323,38 +323,12 @@ svg {
   padding-right: 70px;
 }
 
+.arrive,
+.depart,
 .date,
 .nombre-passagers {
   padding: 10px;
   color: var(--clr-dark);
   border-right: 2px solid rgb(169, 169, 169);
   font-family: var(--ff-secondary);
-}
-
-.arrive,
-.depart {
-  padding: 12px;
-  color: var(--clr-dark);
-  border-right: 2px solid rgb(169, 169, 169);
-  font-family: var(--ff-secondary);
-}
-
-
-.suggestions-list {
-  margin-top: -30px;
-  padding-top: 30px;
-  padding-left: 10px;
-  list-style: none;
-  z-index: 1001;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-
-.suggestions-list li {
-  color: var(--clr-dark);
-}
-
-.suggestions-list li:hover {
-  color: var(--clr-primary);
 }

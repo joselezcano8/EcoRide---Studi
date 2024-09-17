@@ -43,35 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
         'La Seyne-sur-Mer'
     ];
 
-    function handleInput(inputElement, suggestionsElement) {
-        inputElement.addEventListener('input', () => {
-            const query = inputElement.value.toLowerCase();
-            suggestionsElement.classList.toggle('hidden')
-            suggestionsElement.innerHTML = '';
-
-            if (query) {
-                const filteredCities = cities.filter(city => city.toLowerCase().includes(query));
-                filteredCities.forEach(city => {
-                    const li = document.createElement('li');
-                    li.textContent = city;
-                    li.addEventListener('click', () => {
-                        inputElement.value = city;
-                        suggestionsElement.innerHTML = '';
-                    });
-                    suggestionsElement.appendChild(li);
-                });
-            }
-        });
-    }
-
-    handleInput(departInput, departSuggestions);
-    handleInput(arriveInput, arriveSuggestions);
-
-    document.addEventListener('click', (event) => {
-        if (!departInput.contains(event.target) && !departSuggestions.contains(event.target) &&
-            !arriveInput.contains(event.target) && !arriveSuggestions.contains(event.target)) {
-            departSuggestions.innerHTML = '';
-            arriveSuggestions.innerHTML = '';
-        }
+    cities.forEach(city => {
+        const option = document.createElement('option')
+        option.value = city
+        departSuggestions.appendChild(option)
     });
+
+    cities.forEach(city => {
+        const option = document.createElement('option')
+        option.value = city
+        arriveSuggestions.appendChild(option)
+    })
+    console.log(departSuggestions, arriveSuggestions);
 });
