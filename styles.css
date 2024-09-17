@@ -297,31 +297,42 @@ svg {
   display: grid;
 }
 
+
 .form {
   height: 3em;
   display: flex;
   justify-self: center;
-  background-color: white;
   border-radius: 30px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-top: -25px;
   margin-bottom: 50px;
+  gap: 1rem;
+}
+
+.form div {
+  display: flex;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .form * {
   border: 0;
 }
 
-
 .depart {
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
+}
+
+.nombre-passagers {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .rechercher {
   border-radius: 30px;
   padding-left: 70px;
   padding-right: 70px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .arrive,
@@ -329,7 +340,7 @@ svg {
 .date,
 .nombre-passagers {
   padding: 10px;
-  color: var(--clr-dark);
+  /* color: var(--clr-dark) */;
   border-right: 2px solid rgb(169, 169, 169);
   font-family: var(--ff-secondary);
 }
@@ -340,8 +351,20 @@ svg {
     flex-direction: column;
     justify-self: center;
     margin-top: -85px;
-    gap: 1px;
-    box-shadow: rgba(0, 0, 0, 0.15) 3.95px 3.95px 2.6px;
+    gap: 0.75rem;
+  }
+
+  .form div {
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+  .rechercher {
+    align-self: center;
+    text-align: center;
+    width: 80%;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .depart {
@@ -359,5 +382,7 @@ svg {
 
   .nombre-passagers {
     border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 20px;
   }
 }
