@@ -305,6 +305,7 @@ svg {
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-top: -25px;
+  margin-bottom: 50px;
 }
 
 .form * {
@@ -331,4 +332,32 @@ svg {
   color: var(--clr-dark);
   border-right: 2px solid rgb(169, 169, 169);
   font-family: var(--ff-secondary);
+}
+
+@media (max-width: 50em) {
+  .form {
+    height: auto;
+    flex-direction: column;
+    justify-self: center;
+    margin-top: -85px;
+    gap: 1px;
+    box-shadow: rgba(0, 0, 0, 0.15) 3.95px 3.95px 2.6px;
+  }
+
+  .depart {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+  }
+
+  .arrive,
+  .depart,
+  .date {
+    border-right: none;
+    border-bottom: 2px solid rgb(169, 169, 169);;
+  }
+
+  .nombre-passagers {
+    border-right: none;
+  }
 }
