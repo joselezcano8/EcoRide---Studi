@@ -72,6 +72,13 @@ body {
     background-color: var(--clr-clear);
 }
 
+p {
+  color: var(--clr-dark-op);
+  font-family: var(--ff-secondary);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-regular);
+}
+
 .hidden {
   display: none;
 }
@@ -283,4 +290,71 @@ svg {
   font-family: var(--ff-primary);
   font-size: var(--fs-third-heading);
   font-weight: var(--fw-semi-bold);
+}
+
+/*Recherche Itineraire*/
+.main {
+  display: grid;
+}
+
+.form {
+  height: 3em;
+  display: flex;
+  justify-self: center;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: -25px;
+}
+
+.form * {
+  border: 0;
+}
+
+
+.depart {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.rechercher {
+  border-radius: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.date,
+.nombre-passagers {
+  padding: 10px;
+  color: var(--clr-dark);
+  border-right: 2px solid rgb(169, 169, 169);
+  font-family: var(--ff-secondary);
+}
+
+.arrive,
+.depart {
+  padding: 12px;
+  color: var(--clr-dark);
+  border-right: 2px solid rgb(169, 169, 169);
+  font-family: var(--ff-secondary);
+}
+
+
+.suggestions-list {
+  margin-top: -30px;
+  padding-top: 30px;
+  padding-left: 10px;
+  list-style: none;
+  z-index: 1001;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.suggestions-list li {
+  color: var(--clr-dark);
+}
+
+.suggestions-list li:hover {
+  color: var(--clr-primary);
 }

@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleInput(inputElement, suggestionsElement) {
         inputElement.addEventListener('input', () => {
             const query = inputElement.value.toLowerCase();
+            suggestionsElement.classList.toggle('hidden')
             suggestionsElement.innerHTML = '';
 
             if (query) {

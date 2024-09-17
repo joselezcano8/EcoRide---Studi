@@ -37,9 +37,9 @@
     <header class="header" style="background-image: url('img/car_road.jpg');width: 100wh; height: 450px; background-repeat: no-repeat">
         <h1 style="color: var(--clr-clear)">EcoRide</h1>
         <h3 style="color: var(--clr-clear)">Votre trajet, notre planète.</h3>
-        <!--Menu-->
         <!--Overlay-->
         <div class="overlay | hidden"></div>
+        <!--Menu-->
         <div class="menu | hidden">
             <button>
                 <span class="mobile-close-modal">
@@ -54,23 +54,27 @@
             </ul>
         </div>
     </header>
-    <main>
+    <main class="main">
         <!--Recherhce Itineraire-->
         <form class="form" action="">
-            <input type="text" name="" id="depart-input" placeholder="Départ">
-            <ul id="depart-suggestions" class="suggestions-list"></ul>
+            <div>
+                <input type="text" name="" id="depart-input" placeholder="Départ" class="depart">
+                <ul id="depart-suggestions" class="suggestions-list | hidden"></ul>
+            </div>
 
-            <input type="text" name="" id="arrive-input" placeholder="Arrive">
-            <ul id="arrive-suggestions" class="suggestions-list"></ul>
+            <div>
+                <input type="text" name="" id="arrive-input" placeholder="Arrive" class="arrive">
+                <ul id="arrive-suggestions" class="suggestions-list | hidden"></ul>
+            </div>
 
-            <input type="date" name="" id="" placeholder="Date">
+            <input type="date" name="" id="" placeholder="Date" class="date">
 
-            <input type="number" name="" id="" placeholder="Nombre de passagers">
+            <input type="number" name="" id="" placeholder="Nombre de passagers" class="nombre-passagers">
 
-            <input type="button" value="Rechercher" class="button">
+            <input type="button" value="Rechercher" class="button | rechercher">
         </form>
         <section class="objectif">
-            <img src="img/covoiturage.jpg" alt="Image du covoiturage">
+            <img src="img/covoiturage.jpg" style="height: 10px;" alt="Image du covoiturage">
             <div>
                 <h2>Notre Objectif</h2>
                 <p>Chez EcoRide, nous visons à réduire l'impact environnemental des déplacements en facilitant le covoiturage. Notre plateforme offre une solution écologique et économique pour voyager ensemble, tout en préservant notre planète.</p>
