@@ -400,3 +400,32 @@ svg {
 }
 
 /*Footer*/
+.footer {
+  background-color: var(--clr-dark-bg);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 70px;
+}
+
+.footer p {
+  color: var(--clr-clear);
+}
+
+.footer a {
+  color: var(--clr-primary) !important;
+  font-family: var(--ff-secondary);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-regular);
+}
+
+.footer a:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 50em) {
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
