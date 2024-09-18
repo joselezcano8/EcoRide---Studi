@@ -91,6 +91,11 @@ h2 {
   display: none;
 }
 
+.section--hidden {
+  opacity: 0;
+  transform: translateY(8rem);
+}
+
 /* Set core body defaults */
 body {
   text-rendering: optimizeSpeed;
@@ -135,6 +140,11 @@ svg {
     scroll-behavior: auto !important;
   }
 }
+}
+
+.section {
+  border-top: 1px solid #ddd;
+  transition: transform 1s, opacity 1s;
 }
 
 .padding{
@@ -315,7 +325,7 @@ svg {
   justify-self: center;
   border-radius: 30px;
   margin-top: -25px;
-  margin-bottom: 70px;
+  margin-bottom: 200px;
   gap: 1rem;
 }
 
@@ -351,7 +361,6 @@ svg {
 .date,
 .nombre-passagers {
   padding: 10px;
-  /* color: var(--clr-dark) */;
   border-right: 2px solid rgb(169, 169, 169);
   font-family: var(--ff-secondary);
 }

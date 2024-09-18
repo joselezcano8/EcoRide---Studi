@@ -1,5 +1,6 @@
 /*Section Objectif et Covoiturages*/
-.section {
+.objectif,
+.covoiturages {
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -23,7 +24,8 @@
 }
 
 @media (max-width: 50em) {
-    .section {
+    .objectif,
+    .covoiturages {
         padding: 0px 60px;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 300px);
@@ -39,6 +41,10 @@
     .section-text {
         justify-items: center;
         gap: 1rem;
+    }
+
+    .covoiturages {
+        margin-bottom: 100px;
     }
 
     .covoiturages .section-text {
