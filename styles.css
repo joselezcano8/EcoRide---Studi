@@ -21,10 +21,11 @@
     --fs-500: 1.125rem;
     --fs-600: 1.25rem;
     --fs-700: 1.5rem;
+    --fs-800: 2rem;
     --fs-900: 3.5rem;
 
     --fs-primary-heading: var(--fs-900);
-    --fs-secondary-heading: var(--fs-700);
+    --fs-secondary-heading: var(--fs-800);
     --fs-third-heading: var(--fs-600);
     --fs-body: var(--fs-400);
     --fs-nav: var(--fs-500);
@@ -77,6 +78,13 @@ p {
   font-family: var(--ff-secondary);
   font-size: var(--fs-500);
   font-weight: var(--fw-regular);
+}
+
+h2 {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-secondary-heading);
+  font-weight: var(--fw-semi-bold);
+  color: var(--clr-dark);
 }
 
 .hidden {
@@ -132,6 +140,14 @@ svg {
 .padding{
   padding-left: 70px;
   padding-right: 70px;
+}
+
+@media (max-width: 50em) {
+
+  .padding {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 /*Button*/
@@ -238,11 +254,6 @@ svg {
 
 @media (max-width: 50em) {
 
-  .padding {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
   .nav {
     height: 50px;
   }
@@ -304,7 +315,7 @@ svg {
   justify-self: center;
   border-radius: 30px;
   margin-top: -25px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   gap: 1rem;
 }
 
@@ -345,11 +356,12 @@ svg {
   font-family: var(--ff-secondary);
 }
 
-@media (max-width: 50em) {
+@media (max-width: 70em) {
   .form {
     height: auto;
     flex-direction: column;
     justify-self: center;
+    align-self: center;
     margin-top: -85px;
     gap: 0.75rem;
   }
@@ -386,3 +398,5 @@ svg {
     border-bottom-left-radius: 20px;
   }
 }
+
+/*Footer*/
