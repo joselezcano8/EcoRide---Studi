@@ -29,15 +29,15 @@
         </button>
         <ul class="nav-links" id="nav-links">
             <a href="index.php">Accueil</a>
-            <a href="">Covoiturages</a>
+            <a href="covoiturages.php">Covoiturages</a>
             <a href="">Contact</a>
-            <button class="button">Connexion</button>
+            <a href=""><button class="button">Connexion</button></a>
         </ul>
     </nav>
     <!-- Titre, sous-titre et bg image -->
-    <header class="header" style="background-image: url('<?php echo $headerImg; ?>');width: 100wh; height: 450px; background-repeat: no-repeat">
-        <h1 style="color: var(--clr-clear)">EcoRide</h1>
-        <h3 style="color: var(--clr-clear)">Votre trajet, notre planète.</h3>
+    <header class="header" style="background-image: url('<?php echo $headerImg; ?>');width: 100ww; height: 450px; background-repeat: no-repeat">
+        <h1 style="color: var(<?php echo $titleColor; ?>)"><?php echo $firstTitle; ?></h1>
+        <h3 style="color: var(<?php echo $titleColor; ?>)"><?php echo $secondTitle; ?>.</h3>
         <!--Overlay-->
         <div class="overlay | hidden"></div>
         <!--Menu-->

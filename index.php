@@ -2,6 +2,9 @@
 
 $pageTitle = 'Accueil';
 $headerImg = 'img/car_road.jpg';
+$titleColor = '--clr-clear';
+$firstTitle = 'EcoRide';
+$secondTitle = 'Votre trajet, notre planète.';
 include 'inc/header.inc.php';
 
 ?>

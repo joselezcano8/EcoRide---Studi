@@ -1,0 +1,8 @@
+.header {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: var(--fs-secondary-heading);
+}
