@@ -69,6 +69,7 @@
     grid-template-rows: 30px 30px 0px 30px 30px;
     gap: 10px;
     justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     grid-template-areas: 
     'chauffeur chauffeur . price'
     'star . . . '
@@ -76,6 +77,29 @@
     'horaire horaire . .'
     'car eco . button'
     ;
+}
+
+@media (max-width: 70em) {
+    .card {
+        justify-self: center;
+    }
+}
+
+@media (max-width: 32em) {
+    .card {
+        grid-template-columns: 110px 100px 20px 100px;
+        grid-template-rows: 30px 30px 0px 30px 30px;
+        width: 390px;
+    }
+}
+
+@media (max-width: 30em) {
+    .card {
+        grid-template-columns: 110px 90px 10px 100px;
+        grid-template-rows: 30px 30px 0px 30px 30px;
+        gap: 5px;
+        width: 350px;
+    }
 }
 
 .card img {
@@ -121,9 +145,26 @@
 
 .cards {
     display: grid;
-    width: 980px;
+    width: auto;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
+
+@media (max-width: 70em) {
+    .cards {
+        grid-template-columns: 1fr;
+        width: auto;
+    }
+}
+
+.overlay {
+    display: grid;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
+  
