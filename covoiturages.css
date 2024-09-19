@@ -1,3 +1,5 @@
+/*Header */
+
 .header {
     justify-content: flex-end;
     align-items: center;
@@ -7,8 +9,87 @@
     font-size: var(--fs-secondary-heading);
 }
 
-@media (min-width: 90em) {
+@media (max-width: 70em) {
     .header h1 {
         margin-bottom: 60px;
     }
+}
+
+/*¨Form */
+.form {
+    margin-bottom: 3rem;
+}
+
+/*No voyage*/
+.no-voyage {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+}
+
+
+/*Card*/
+
+.card-chauffeur {
+    grid-area: chauffeur;
+}
+
+.card-star {
+    grid-area: star;
+}
+
+.card-horaire {
+    grid-area: horaire;
+}
+
+.card-car {
+    grid-area: car;
+}
+
+.card-eco {
+    grid-area: eco;
+}
+
+.card-price {
+    grid-area: price;
+}
+
+.card-button {
+    grid-area: button;
+}
+
+.card {
+    background-color: white !important;
+    border-radius: 30px;
+    width: 680px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    grid-template-rows: 40px 40px 10px 40px 40px;
+    gap: 20px;
+    grid-template-areas: 
+    'chauffeur chauffeur . price'
+    'star . . . '
+    '. . . .'
+    'horaire horaire . .'
+    'car eco . button'
+    ;
+}
+
+.card img {
+    height: 45px;
+}
+
+.card p {
+    color: var(--clr-dark);
+}
+
+.card-chauffeur,
+.card-star,
+.card-car,
+.card-eco {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

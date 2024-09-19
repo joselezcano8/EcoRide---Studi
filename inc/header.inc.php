@@ -24,7 +24,7 @@
         <!-- Hamburguer Menu-->
         <button class="mobile-open-modal">
             <span>
-                <img src="img/icon-hamburger.svg" alt="Open Menu">
+                <img src="img/svg/icon-hamburger.svg" alt="Open Menu">
             </span>
         </button>
         <ul class="nav-links" id="nav-links">
@@ -44,12 +44,12 @@
         <div class="menu | hidden">
             <button>
                 <span class="mobile-close-modal">
-                     <img src="img/icon-close.svg" alt="Close Menu">
+                     <img src="img/svg/icon-close.svg" alt="Close Menu">
                 </span>
             </button>
             <ul class="mobile-nav-links">
-                <a href="">Accueil</a>
-                <a href="">Covoiturages</a>
+                <a href="index.php">Accueil</a>
+                <a href="covoiturages.php">Covoiturages</a>
                 <a href="">Contact</a>
                 <a href="">Connexion</a>
             </ul>
