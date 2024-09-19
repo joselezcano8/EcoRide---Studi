@@ -6,3 +6,9 @@
 .header h1 {
     font-size: var(--fs-secondary-heading);
 }
+
+@media (min-width: 90em) {
+    .header h1 {
+        margin-bottom: 60px;
+    }
+}
