@@ -62,12 +62,13 @@
 .card {
     background-color: white !important;
     border-radius: 30px;
-    width: 680px;
+    width: 480px;
     padding: 15px;
     display: grid;
-    grid-template-columns: repeat(4, 150px);
-    grid-template-rows: 40px 40px 10px 40px 40px;
-    gap: 20px;
+    grid-template-columns: 130px 130px 40px 130px;
+    grid-template-rows: 30px 30px 0px 30px 30px;
+    gap: 10px;
+    justify-content: center;
     grid-template-areas: 
     'chauffeur chauffeur . price'
     'star . . . '
@@ -78,18 +79,51 @@
 }
 
 .card img {
-    height: 45px;
+    height: 30px;
 }
 
 .card p {
+    font-size: 1rem;
     color: var(--clr-dark);
 }
 
-.card-chauffeur,
-.card-star,
-.card-car,
-.card-eco {
+.card h2 {
+    font-size: 1.5rem;
+}
+
+.card *
+{
     display: flex;
     align-items: center;
+    justify-content: left;
     gap: 10px;
+}
+
+.card-price,
+.card-button {
+    justify-content: center;
+}
+
+/*Card Zone*/
+
+.voyages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.voyages button {
+    align-self: flex-start;
+
+}
+
+.cards {
+    display: grid;
+    width: 980px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }

@@ -18,7 +18,7 @@
 <body>
     <!-- Section de la barre de navigation -->
     <nav class="nav | padding">
-        <a href="">
+        <a href="index.php">
             <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
         </a>
         <!-- Hamburguer Menu-->
