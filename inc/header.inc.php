@@ -16,39 +16,7 @@
     <link rel="stylesheet" href="<?php echo $pageTitle; ?>.css">
 </head>
 <body>
-    <!--Overlay-->
-    <div class="overlay | hidden"></div>
-    <!-- Section de la barre de navigation -->
-    <nav class="nav | padding">
-        <a href="index.php">
-            <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
-        </a>
-        <!-- Hamburguer Menu-->
-        <button class="mobile-open-modal">
-            <span>
-                <img src="img/svg/icon-hamburger.svg" alt="Open Menu">
-            </span>
-        </button>
-        <ul class="nav-links" id="nav-links">
-            <a href="index.php">Accueil</a>
-            <a href="covoiturages.php">Covoiturages</a>
-            <a href="">Contact</a>
-            <a href=""><button class="button">Connexion</button></a>
-        </ul>
-    </nav>
-    <div class="menu | hidden">
-        <button>
-            <span class="mobile-close-modal">
-                 <img src="img/svg/icon-close.svg" alt="Close Menu">
-            </span>
-        </button>
-        <ul class="mobile-nav-links">
-            <a href="index.php">Accueil</a>
-            <a href="covoiturages.php">Covoiturages</a>
-            <a href="">Contact</a>
-            <a href="">Connexion</a>
-        </ul>
-    </div>
+    <?php include 'inc/nav.inc.php' ?>
     <!-- Titre, sous-titre et bg image -->
     <header class="header" style="background-image: url('<?php echo $headerImg; ?>'); height: 450px; background-repeat: no-repeat">
         <h1 style="color: var(<?php echo $titleColor; ?>)"><?php echo $firstTitle; ?></h1>
