@@ -25,8 +25,8 @@ include 'inc/header.inc.php';
         </main>
 
         <?php include 'inc/footer.inc.php'; ?>
-            <script src="script-itineraire.js"></script>
-            <script src="modal.js"></script>
-            <script src="reveal-sections,js"></script>
+            <script src="script/script-itineraire.js"></script>
+            <script src="script/modal.js"></script>
+            <script src="script/reveal-sections.js"></script>
     </body>
 </html>

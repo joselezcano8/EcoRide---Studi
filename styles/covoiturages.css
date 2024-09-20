@@ -158,3 +158,8 @@
         width: auto;
     }
 }
+
+/*Section*/ 
+.section {
+    border-top: none;
+}
