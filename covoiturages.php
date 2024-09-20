@@ -13,7 +13,7 @@ include 'inc/header.inc.php';
             <section class="no-voyage | hidden">
                 <p>Veuillez indiquer le lieu de départ, d'arrivée, la date et le nombre de passagers...</p>
             </section>
-            <section class="voyages">
+            <section class="voyages | section">
                 <button class="button">Filtres</button>
                 <div class="cards">
                 <?php include 'inc/card.inc.php'; ?>
@@ -27,5 +27,6 @@ include 'inc/header.inc.php';
         <?php include 'inc/footer.inc.php'; ?>
             <script src="script-itineraire.js"></script>
             <script src="modal.js"></script>
+            <script src="reveal-sections,js"></script>
     </body>
 </html>
