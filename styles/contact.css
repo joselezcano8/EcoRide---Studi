@@ -1,0 +1,93 @@
+.main {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
+    background-color: white;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 100px;
+    margin-top: 30px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.contact h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-secondary-heading);
+    font-weight: var(--fw-semi-bold);
+    color: var(--clr-dark);
+}
+
+.contact-name {
+    grid-area: name;
+}
+
+.contact-lastname {
+    grid-area: lastname;
+}
+
+.contact-email {
+    grid-area: email;
+}
+
+.contact-message {
+    grid-area: message;
+}
+
+.contact .button {
+    grid-area: button;
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-row: 30px 30px 90px 30px;
+    grid-template-areas: 
+    'name lastname'
+    'email email'
+    'message message'
+    'button button';
+    gap: 20px;
+}
+
+@media (max-width: 45em) {
+    .contact-form {
+        grid-template-columns: 1fr;
+        grid-row: 30px 30px 30px 90px 30px;
+        grid-template-areas: 
+        'name'
+        'lastname'
+        'email'
+        'message'
+        'button';
+    }
+}
+
+.contact-name,
+.contact-lastname,
+.contact-email,
+.contact-message {
+    background-color: var(--clr-clear);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.contact-message {
+    resize: none;
+    height: 7rem;
+}
+
+.contact .button {
+    margin-top: 1.5rem;
+    width: 7rem;
+    justify-self: center;
+}
+
