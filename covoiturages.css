@@ -159,12 +159,19 @@
     }
 }
 
+/*Overlay*/
+.nav,
+h1,
+h2,
+.main,
+.footer {
+    z-index: -1;
+}
+
 .overlay {
-    display: grid;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
-    z-index: 1;
-  }
-  
+    z-index: 100;
+}
+
+.menu {
+    z-index: 150;
+}
