@@ -158,20 +158,3 @@
         width: auto;
     }
 }
-
-/*Overlay*/
-.nav,
-h1,
-h2,
-.main,
-.footer {
-    z-index: -1;
-}
-
-.overlay {
-    z-index: 100;
-}
-
-.menu {
-    z-index: 150;
-}
