@@ -57,7 +57,7 @@
         <form action="" class="connexion-form">
             <div class="connexxion-form-utilisateur">
                 <label for="connexion-utilisateur">Nom'dutilisateur</label>
-                <input type="text" placeholder="Email ou ID" id="connexion-utilisateur" class="connexion-utilisateur">
+                <input type="email" placeholder="Email ou ID" id="connexion-utilisateur" class="connexion-utilisateur">
             </div>
 
             <div class="connexion-form-password">
@@ -67,5 +67,5 @@
 
             <input type="submit" value="Se connecter" class="button">
         </form>
-        <a href="">Pas encore de compte?</a>
+        <a href="creation-compte.php">Pas encore de compte?</a>
      </div>

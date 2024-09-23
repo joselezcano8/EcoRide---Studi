@@ -1,0 +1,56 @@
+.header {
+    padding-top: 10px;
+    display: grid;
+    justify-content: left;
+}
+
+h1 {
+    font-family: var(--ff-primary) !important;
+    font-size: var(--fs-secondary-heading) !important;
+    font-weight: var(--fw-semi-bold) !important;
+    color: var(--clr-dark);
+}
+
+.creation-compte {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    border: none;
+}
+
+.form-cration-compte {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 100px 30px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    gap: 1em;
+}
+
+.form-cration-compte div {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: var(--ff-secondary) !important;
+    color: var(--clr-dark) !important;
+    font-weight: var(--fw-semi-bold) !important;
+}
+input{
+    background-color: var(--clr-clear);
+    height: 2em;
+    border: none;
+    padding: 5px !important;
+    border-radius: 15px;
+    font-family: var(--ff-secondary);
+}
+
+.button {
+    align-self: center;
+    padding: 5px 15px !important;
+    margin-top: 2rem;
+}
