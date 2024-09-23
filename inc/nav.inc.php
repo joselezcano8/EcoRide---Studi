@@ -17,7 +17,7 @@
 </head>
 <body>
     <!--Overlay-->
-    <div class="overlay | hidden"></div>
+    <div class="overlay | hidden"></div> 
     <!-- Section de la barre de navigation -->
     <nav class="nav | padding">
         <a href="index.php">
@@ -29,13 +29,15 @@
                 <img src="img/svg/icon-hamburger.svg" alt="Open Menu">
             </span>
         </button>
+        <!-- Nav List -->
         <ul class="nav-links" id="nav-links">
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <button class="button">Connexion</button>
+            <button class="button | connexion">Connexion</button>
         </ul>
     </nav>
+    <!-- Menu -->
     <div class="menu | hidden">
         <button>
             <span class="mobile-close-modal">
@@ -46,6 +48,24 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <a href="">Connexion</a>
+            <a class="connexion">Connexion</a>
         </ul>
     </div>
+    <!-- Connexion Menu -->
+     <div class="connexion-menu | hidden">
+        <h2>Connexion</h2>
+        <form action="" class="connexion-form">
+            <div class="connexxion-form-utilisateur">
+                <label for="connexion-utilisateur">Nom'dutilisateur</label>
+                <input type="text" placeholder="Email ou ID" id="connexion-utilisateur" class="connexion-utilisateur">
+            </div>
+
+            <div class="connexion-form-password">
+                <label for="connexion-password">Mot de passe</label>
+                <input type="password" placeholder="Mot de passe" id="connexion-password" class="connexion-password">
+            </div>
+
+            <input type="submit" value="Se connecter" class="button">
+        </form>
+        <a href="">Pas encore de compte?</a>
+     </div>

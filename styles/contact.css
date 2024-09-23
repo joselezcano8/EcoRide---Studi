@@ -78,6 +78,7 @@
     border: none;
     padding: 5px;
     border-radius: 5px;
+    font-family: var(--ff-secondary);
 }
 
 .contact-message {

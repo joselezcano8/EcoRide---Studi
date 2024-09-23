@@ -5,18 +5,28 @@ const closeModal = document.querySelector('.mobile-close-modal');
 const overlay = document.querySelector('.overlay');
 const menu = document.querySelector('.menu');
 
-console.log(openModal, closeModal, overlay, menu);
+const connexionBtns = document.querySelectorAll('.connexion');
+const connexionMenu = document.querySelector('.connexion-menu')
 
+
+//Modal Menu
 openModal.addEventListener('click', function(e) {
     overlay.classList.remove('hidden');
     menu.classList.remove('hidden');
-    console.log(this);
 });
+
+//Modal Connexion
+connexionBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        overlay.classList.remove('hidden');
+        connexionMenu.classList.remove('hidden');
+    })
+})
 
 [overlay, closeModal].forEach(btn => {
     btn.addEventListener('click', function(e) {
         overlay.classList.add('hidden');
         menu.classList.add('hidden');
-        console.log(this);
+        connexionMenu.classList.add('hidden')
     });
 });
