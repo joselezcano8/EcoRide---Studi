@@ -33,7 +33,7 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <a href=""><button class="button">Connexion</button></a>
+            <button class="button">Connexion</button>
         </ul>
     </nav>
     <div class="menu | hidden">
