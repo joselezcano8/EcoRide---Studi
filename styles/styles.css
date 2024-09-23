@@ -305,8 +305,6 @@ svg {
   background-color: white;
   position: fixed;
   padding: 50px 50px 15px;
-  /* width: 50%;
-  height: 60%; */
   z-index: 1000;
   top: 80px;
   border-radius: 15px;
