@@ -34,7 +34,7 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <button class="button | connexion">Connexion</button>
+            <button class="button | connexion-btn">Connexion</button>
         </ul>
     </nav>
     <!-- Menu -->
@@ -48,7 +48,7 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <a class="connexion">Connexion</a>
+            <a class="connexion-link">Connexion</a>
         </ul>
     </div>
     <!-- Connexion Menu -->

@@ -358,6 +358,10 @@ svg {
   text-decoration: underline;
 }
 
+.connexion-link {
+  cursor: pointer;
+}
+
 /*Header*/
 .header {
   display: flex;
