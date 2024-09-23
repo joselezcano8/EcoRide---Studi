@@ -6,6 +6,7 @@ const overlay = document.querySelector('.overlay');
 const menu = document.querySelector('.menu');
 
 const connexionBtns = document.querySelectorAll('.connexion');
+console.log(connexionBtns);
 const connexionMenu = document.querySelector('.connexion-menu')
 
 
