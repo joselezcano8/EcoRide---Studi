@@ -16,10 +16,7 @@ include 'inc/header.inc.php';
             <section class="voyages | section">
                 <button class="button">Filtres</button>
                 <div class="cards">
-                <?php include 'inc/card.inc.php'; ?>
-                <?php include 'inc/card.inc.php'; ?>
-                <?php include 'inc/card.inc.php'; ?>
-                <?php include 'inc/card.inc.php'; ?>
+                <?php include 'inc/card.sql.inc.php'; ?>
 
             </section>
         </main>
