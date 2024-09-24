@@ -20,7 +20,7 @@ include 'inc/header.inc.php';
                 <?php include 'inc/card.inc.php'; ?>
                 <?php include 'inc/card.inc.php'; ?>
                 <?php include 'inc/card.inc.php'; ?>
-                </div>
+
             </section>
         </main>
 
