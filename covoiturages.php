@@ -10,10 +10,10 @@ include 'inc/header.inc.php';
 
         <main class="main | padding">
             <?php include 'inc/itineraire.inc.php'; ?>
-            <section class="no-voyage | hidden">
+            <section class="no-voyage">
                 <p>Veuillez indiquer le lieu de départ, d'arrivée, la date et le nombre de passagers...</p>
             </section>
-            <section class="voyages | section">
+            <section class="voyages | section | hidden">
                 <button class="button">Filtres</button>
                 <div class="cards">
                 <?php include 'inc/card.sql.inc.php'; ?>

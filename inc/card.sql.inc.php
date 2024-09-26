@@ -30,8 +30,9 @@ SELECT
      c.ID_covoiturage,
      compte.pseudo AS chauffeur_pseudo,
      chauffeur.note AS chauffeur_note,
-     c.heure_depart,
-     c.heure_arrivee,
+     DATE_FORMAT(c.heure_depart, "%Hh%i") AS heure_depart_formatee,
+     DATE_FORMAT(c.heure_arrivee, "%Hh%i") AS heure_arrivee_formatee,
+     DATE_FORMAT(c.date, "%d/%c/%Y") AS date_formatee,
      c.places_disponibles,
      vehicule.eco AS vehicule_eco,
      c.prix
@@ -103,8 +104,9 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $chauffeurPseudo = htmlspecialchars($row['chauffeur_pseudo']);
         $chauffeurNote = htmlspecialchars($row['chauffeur_note']);
-        $heureDepart = htmlspecialchars($row['heure_depart']);
-        $heureArrivee = htmlspecialchars($row['heure_arrivee']);
+        $heureDepart = htmlspecialchars($row['heure_depart_formatee']);
+        $heureArrivee = htmlspecialchars($row['heure_arrivee_formatee']);
+        $date = htmlspecialchars($row['date_formatee']);
         $placesDisponibles = htmlspecialchars($row['places_disponibles']);
         $vehiculeEco = $row['vehicule_eco'] ? 'Oui' : 'Non';
         $prix = htmlspecialchars($row['prix']);
@@ -119,6 +121,9 @@ if ($result->num_rows > 0) {
             <div class="card-star">
                 <img src="img/svg/star.svg" alt="">
                 <p><?php echo $chauffeurNote; ?>/5</p>
+            </div>
+            <div class="card-date">
+                <p><?php echo $date?></p>
             </div>
             <div class="card-horaire">
                 <p><?php echo $heureDepart; ?> - <?php echo $heureArrivee; ?></p>

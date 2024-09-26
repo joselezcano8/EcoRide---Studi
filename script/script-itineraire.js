@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nombrePassagers = document.getElementById('nombre-passagers');
     const formRecherche = document.getElementById('form-recherche');
     const cardsContainer = document.querySelector('.cards');
+    const sectionNoVoyage = document.querySelector('.no-voyage');
+    const sectionVoyages = document.querySelector('.voyages');
 
     // Tableau des villes françaises
     const cities = [
@@ -65,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cardsContainer.innerHTML = `<p>Erreur : ${error.message}</p>`;
             console.error('Erreur dans la requête fetch :', error);
         });
+
+        sectionNoVoyage.classList.add('hidden');
+        sectionVoyages.classList.remove('hidden');
+
     });
 
     // Fonction pour afficher les cartes de covoiturages
@@ -84,8 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="img/svg/star.svg" alt="">
                     <p>${covoiturage.chauffeur_note}/5</p>
                 </div>
+                <div class="card-date">
+                    <p>${covoiturage.date_formatee}</p>
+                </div>
                 <div class="card-horaire">
-                    <p>${covoiturage.heure_depart} - ${covoiturage.heure_arrivee}</p>
+                    <p>${covoiturage.heure_depart_formatee} - ${covoiturage.heure_arrivee_formatee}</p>
                 </div>
                 <div class="card-car">
                     <img src="img/svg/car.svg" alt="">
