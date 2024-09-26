@@ -9,10 +9,6 @@
     font-size: var(--fs-secondary-heading);
 }
 
-p {
-    text-align: center !important;
-    text-justify: center !important;
-}
 
 @media (max-width: 70em) {
     .header h1 {

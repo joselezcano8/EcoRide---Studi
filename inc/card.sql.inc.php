@@ -1,3 +1,4 @@
+<div class="cards">
 <?php
 // inc/card.sql.inc.php
 
@@ -17,11 +18,17 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les paramètres de recherche
-$depart = isset($_POST['depart']) ? $_POST['depart'] : '';
-$arrive = isset($_POST['arrive']) ? $_POST['arrive'] : '';
-$passagers = isset($_POST['passagers']) ? intval($_POST['passagers']) : 1;
+$depart = isset($_GET['depart']) ? $_GET['depart'] : '';
+$arrive = isset($_GET['arrive']) ? $_GET['arrive'] : '';
+$passagers = isset($_GET['passagers']) ? intval($_GET['passagers']) : 1;
+$date = isset($_GET['date']) ? $_GET['date'] : '';
 if ($passagers < 1) {
     $passagers = 1;
+}
+
+$searchPerformed = false;
+if (!empty($depart) && !empty($arrive)) {
+    $searchPerformed = true;
 }
 
 // Construire la requête SQL
@@ -64,6 +71,12 @@ if (!empty($arrive)) {
     $types .= 's';
 }
 
+if (!empty($date)) {
+    $sql .= ' AND c.date >= ?';
+    $params[] = $date;
+    $types .= 's';
+}
+
 if (!empty($passagers)) {
     $sql .= ' AND c.places_disponibles >= ?';
     $params[] = $passagers;
@@ -87,70 +100,62 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Vérifier si c'est une requête AJAX
-if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-    $covoiturages = [];
-    while ($row = $result->fetch_assoc()) {
-        $covoiturages[] = $row;
-    }
-    echo json_encode(['success' => true, 'data' => $covoiturages]);
-    $stmt->close();
-    $conn->close();
-    exit;
-}
-
-// Générer les cartes si ce n'est pas une requête AJAX
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+// 
+if ($searchPerformed) {
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
         $chauffeurPseudo = htmlspecialchars($row['chauffeur_pseudo']);
         $chauffeurNote = htmlspecialchars($row['chauffeur_note']);
         $heureDepart = htmlspecialchars($row['heure_depart_formatee']);
         $heureArrivee = htmlspecialchars($row['heure_arrivee_formatee']);
-        $date = htmlspecialchars($row['date_formatee']);
+        $date_formatee = htmlspecialchars($row['date_formatee']);
         $placesDisponibles = htmlspecialchars($row['places_disponibles']);
         $vehiculeEco = $row['vehicule_eco'] ? 'Oui' : 'Non';
         $prix = htmlspecialchars($row['prix']);
         $ID_covoiturage = htmlspecialchars($row['ID_covoiturage']);
         ?>
 
-        <div class="card">
-            <div class="card-chauffeur">  
-                <img src="img/svg/user.svg" alt="">
-                <p><?php echo $chauffeurPseudo; ?></p>
-            </div>
-            <div class="card-star">
-                <img src="img/svg/star.svg" alt="">
-                <p><?php echo $chauffeurNote; ?>/5</p>
-            </div>
-            <div class="card-date">
-                <p><?php echo $date?></p>
-            </div>
-            <div class="card-horaire">
-                <p><?php echo $heureDepart; ?> - <?php echo $heureArrivee; ?></p>
-            </div>
-            <div class="card-car">
-                <img src="img/svg/car.svg" alt="">
-                <p><?php echo $placesDisponibles; ?> places</p>
-            </div>
-            <div class="card-eco">
-                <img src="img/svg/feuille.svg" alt="">
-                <p><?php echo $vehiculeEco; ?></p>
-            </div>
-            <div class="card-price">
-                <h2><?php echo $prix; ?> Crédits</h2>
-            </div>
-            <div class="card-button">
-                <form action="detail_covoiturage.php" method="get">
-                    <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
-                    <button type="submit" class="button">Détail</button>
-                </form>
-            </div>
+    <div class="card">
+        <div class="card-chauffeur">  
+            <img src="img/svg/user.svg" alt="">
+            <p><?php echo $chauffeurPseudo; ?></p>
         </div>
-
-        <?php
-    }
-} else {
-    echo '<p>Aucun covoiturage disponible.</p>';
+        <div class="card-star">
+                    <img src="img/svg/star.svg" alt="">
+                    <p><?php echo $chauffeurNote; ?>/5</p>
+                </div>
+                <div class="card-date">
+                    <p><?php echo $date_formatee?></p>
+                </div>
+                <div class="card-horaire">
+                    <p><?php echo $heureDepart; ?> - <?php echo $heureArrivee; ?></p>
+                </div>
+                <div class="card-car">
+                    <img src="img/svg/car.svg" alt="">
+                    <p><?php echo $placesDisponibles; ?> places</p>
+                </div>
+                <div class="card-eco">
+                    <img src="img/svg/feuille.svg" alt="">
+                    <p><?php echo $vehiculeEco; ?></p>
+                </div>
+                <div class="card-price">
+                    <h2><?php echo $prix; ?> Crédits</h2>
+                </div>
+                <div class="card-button">
+                    <form action="detail_covoiturage.php" method="get">
+                        <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                        <button type="submit" class="button">Détail</button>
+                    </form>
+                </div>
+            </div>
+            
+            <?php
+        }
+    } else {
+        echo '</div><p>Aucun covoiturage disponible.</p>';
+}}
+else {
+    echo '</div><p>Veuillez indiquer le lieu de départ, d\'arrivée, la date et le nombre de passagers...</p>';
 }
 
 $stmt->close();
