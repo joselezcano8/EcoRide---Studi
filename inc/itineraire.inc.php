@@ -1,4 +1,4 @@
-<form class="form" action="">
+<form class="form" id="form-recherche">
     <div>
         <input type="text" name="" id="depart-input" list="depart-suggestions" placeholder="Départ" class="depart">
         <datalist id="depart-suggestions"></datalist>
@@ -8,8 +8,8 @@
                 
         <input type="date" name="" placeholder="Date" class="date">
                 
-        <input type="number" name="" placeholder="Nombre de passagers" class="nombre-passagers">
+        <input type="number" name="" id="nombre-passagers" min="1" placeholder="Nombre de passagers" class="nombre-passagers">
         </div>
 
-        <input type="button" value="Rechercher" class="button | rechercher">
+        <input type="submit" value="Rechercher" class="button | rechercher">
 </form>
