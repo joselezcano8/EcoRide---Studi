@@ -1,10 +1,5 @@
 <div class="cards">
 <?php
-// inc/card.sql.inc.php
-
-// Afficher les erreurs (uniquement pour le développement ; à retirer en production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 // Connexion à la base de données
 $servername = 'localhost';
@@ -142,7 +137,7 @@ if ($searchPerformed) {
                     <h2><?php echo $prix; ?> Crédits</h2>
                 </div>
                 <div class="card-button">
-                    <form action="detail_covoiturage.php" method="get">
+                    <form action="detail-covoiturage.php" method="get">
                         <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
                         <button type="submit" class="button">Détail</button>
                     </form>
