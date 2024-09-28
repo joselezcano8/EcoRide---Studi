@@ -1,0 +1,38 @@
+.header h3 {
+    font-size: var(--fs-secondary-heading);
+    font-weight: var(--fw-semi-bold);
+}
+
+.info-covoiturage {
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
+    gap: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    border: none;
+}
+
+.info-covoiturage p {
+    color: var(--clr-dark) !important;
+}
+
+.info-covoiturage h3 {
+    color: var(--clr-dark) !important;
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-third-heading);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 60em) {
+    .info-covoiturage {
+        grid-template-columns: 450px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 40em) {
+    .info-covoiturage{
+        grid-template-columns: 400px;
+    }
+}
