@@ -141,6 +141,7 @@ $resultAvis = $stmtAvis->get_result();
 if ($resultAvis->num_rows > 0) { ?>
     <section class="splide | section">
         <div class="avis | splide__track | padding">
+            <h2>Avis du Chauffeur</h2>
             <ul class="splide__list">
             <?php
             while ($avis = $resultAvis->fetch_assoc()) {
