@@ -139,27 +139,33 @@ $stmtAvis->execute();
 $resultAvis = $stmtAvis->get_result();
     
 if ($resultAvis->num_rows > 0) { ?>
-    <section class="avis">
+    <section class="splide | section">
+        <div class="avis | splide__track | padding">
+            <ul class="splide__list">
             <?php
             while ($avis = $resultAvis->fetch_assoc()) {
                 $avisPseudo = htmlspecialchars($avis['pseudo']);
                 $avisDescription = htmlspecialchars($avis['description']);
                 $avisEtoiles = htmlspecialchars($avis['etoiles']);
                 ?>
-
+                
+                <li class="splide__slide">
                 <div class="avis-card">
                     <p class="avis-pseudo"><?php echo $avisPseudo ?></p>
-                    <p>“<?php echo $avisDescription ?>”</p>
+                    <p class="avis-description">“<?php echo $avisDescription ?>”</p>
                     <span class="avis-etoiles">
                         <p><?php echo $avisEtoiles ?></p>
                         <img src="img/svg/star.svg" alt="">
                     </span>
                 </div>
+                </li>
 
 
             <?php
             }
             ?>
+            </ul>
+            </div>
     </section>
 
 <?php
@@ -175,7 +181,13 @@ $conn->close(); ?>
 <?php include 'inc/footer.inc.php'; ?>
 <script src="script/modal.js"></script>
 <script src="script/reveal-sections.js"></script>
-<script src="detail.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script>
+        document.addEventListener( 'DOMContentLoaded', function() {
+          var splide = new Splide( '.splide' );
+          splide.mount();
+        } );
+      </script>
 </body>
 </html>
 
