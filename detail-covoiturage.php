@@ -1,4 +1,4 @@
-<?php
+d<?php
 
 $pageTitle = 'Détail du Covoiturage';
 $headerImg = 'img/highway.jpg';
@@ -67,7 +67,7 @@ $result = $stmt->get_result();
 
 if($result->num_rows > 0) {
     $covoiturage = $result->fetch_assoc();
-} else echo('<p>Covoiturage non trouvé. <a href="covoiturages.php">Retour à la liste des covoiturages</a></p>');
+} else echo('<div style="height: 40%"><p style="text-align: center">Covoiturage non trouvé. <a href="covoiturages.php">Retour à la liste des covoiturages</a></p></div>');
 
 $covoiturage = isset($covoiturage) ? $covoiturage : null;
 if ($covoiturage) {
@@ -88,8 +88,6 @@ if ($covoiturage) {
 } else;
 
 
-$stmt->close();
-$conn->close();
 
 $ID_covoiturage = isset($ID_covoiturage) ? $ID_covoiturage : null;
 if($ID_covoiturage && $covoiturage): ?>
@@ -118,6 +116,57 @@ if($ID_covoiturage && $covoiturage): ?>
             <p>Autres préférences: <?php echo htmlspecialchars($covoiturage['preferences']) ?></p>
         </div>
     </section>
+    <button class="button" style="justify-self: center;">Participer</button>
+<?php
+$sqlAvis = '
+SELECT
+compte.pseudo,
+avis.description,
+avis.etoiles
+FROM avis
+JOIN vehicule ON avis.ID_chauffeur = vehicule.ID_chauffeur
+JOIN compte ON avis.ID_passager = compte.ID
+JOIN covoiturage ON covoiturage.ID_vehicule = vehicule.ID_vehicule
+WHERE covoiturage.ID_covoiturage = ?';
+    
+$stmtAvis = $conn->prepare($sqlAvis);
+if($stmtAvis === false) {
+    die('Erreur lors de la préparation de la requête : ' . $conn->error);
+}
+    
+$stmtAvis->bind_param('i', $ID_covoiturage);
+$stmtAvis->execute();
+$resultAvis = $stmtAvis->get_result();
+    
+if ($resultAvis->num_rows > 0) { ?>
+    <section class="avis">
+            <?php
+            while ($avis = $resultAvis->fetch_assoc()) {
+                $avisPseudo = htmlspecialchars($avis['pseudo']);
+                $avisDescription = htmlspecialchars($avis['description']);
+                $avisEtoiles = htmlspecialchars($avis['etoiles']);
+                ?>
+
+                <div class="avis-card">
+                    <p class="avis-pseudo"><?php echo $avisPseudo ?></p>
+                    <p>“<?php echo $avisDescription ?>”</p>
+                    <span class="avis-etoiles">
+                        <p><?php echo $avisEtoiles ?></p>
+                        <img src="img/svg/star.svg" alt="">
+                    </span>
+                </div>
+
+
+            <?php
+            }
+            ?>
+    </section>
+
+<?php
+}
+    
+$stmt->close();
+$conn->close(); ?>
 </main>
 <?php endif; ?>
 
@@ -126,6 +175,7 @@ if($ID_covoiturage && $covoiturage): ?>
 <?php include 'inc/footer.inc.php'; ?>
 <script src="script/modal.js"></script>
 <script src="script/reveal-sections.js"></script>
+<script src="detail.js"></script>
 </body>
 </html>
 
