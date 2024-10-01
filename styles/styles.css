@@ -214,6 +214,10 @@ svg {
   display: none
 }
 
+.user-nav {
+  height: 45px ;
+}
+
 /*Menu*/
 .menu {
   display: flex;

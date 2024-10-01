@@ -9,6 +9,18 @@ const connexionBtn = document.querySelector('.connexion-btn');
 const connexionLink = document.querySelector('.connexion-link')
 const connexionMenu = document.querySelector('.connexion-menu')
 
+//Close Menus
+overlay.addEventListener('click', function(e) {
+    overlay.classList.add('hidden');
+    menu.classList.add('hidden');
+    connexionMenu.classList.add('hidden')
+});
+
+closeModal.addEventListener('click', function(e) {
+    overlay.classList.add('hidden');
+    menu.classList.add('hidden');
+    connexionMenu.classList.add('hidden')
+});
 
 //Modal Menu
 openModal.addEventListener('click', function(e) {
@@ -27,16 +39,3 @@ connexionLink.addEventListener('click', function(e) {
     menu.classList.add('hidden');
 })
 
-
-//Close Menus
-overlay.addEventListener('click', function(e) {
-    overlay.classList.add('hidden');
-    menu.classList.add('hidden');
-    connexionMenu.classList.add('hidden')
-});
-
-closeModal.addEventListener('click', function(e) {
-    overlay.classList.add('hidden');
-    menu.classList.add('hidden');
-    connexionMenu.classList.add('hidden')
-});

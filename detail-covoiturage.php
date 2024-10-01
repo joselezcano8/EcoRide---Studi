@@ -6,17 +6,7 @@ $titleColor = '--clr-dark';
 $firstTitle = '';
 $secondTitle = 'Détail du Covoiturage';
 include 'inc/header.inc.php';
-
-// Connexion à la base de données
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'ecoride';
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die('Connexion échouée : ' . $conn->connect_error);
-}
+require_once 'inc/config.php';
 
 //Récuperer l'ID Covoiturage
 if (isset($_GET['ID_covoiturage']) && is_numeric($_GET['ID_covoiturage'])) {

@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,7 +25,7 @@
     <!-- Section de la barre de navigation -->
     <nav class="nav | padding">
         <a href="index.php">
-            <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
+            <img class="logo" src="img/logo_primary.png" alt="Logo EcoRide">
         </a>
         <!-- Hamburguer Menu-->
         <button class="mobile-open-modal">
@@ -36,7 +38,13 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <button class="button | connexion-btn">Connexion</button>
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <a href="mon-compte.php">
+                    <img src="img/svg/user.svg" alt="User" class="user-nav">
+                </a>
+            <?php else: ?>
+                <button class="button | connexion-btn">Connexion</button>
+            <?php endif ?>
         </ul>
     </nav>
     <!-- Menu -->
@@ -50,24 +58,31 @@
             <a href="index.php">Accueil</a>
             <a href="covoiturages.php">Covoiturages</a>
             <a href="contact.php">Contact</a>
-            <a class="connexion-link">Connexion</a>
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <a href="mon-compte.php">Mon Compte</a>
+            <?php else: ?>
+                <a class="connexion-link">Connexion</a>
+            <?php endif ?>
         </ul>
     </div>
     <!-- Connexion Menu -->
      <div class="connexion-menu | hidden">
         <h2>Connexion</h2>
-        <form action="" class="connexion-form">
-            <div class="connexxion-form-utilisateur">
+        <form id="connexion-form" class="connexion-form">
+            <div class="connexion-form-utilisateur">
                 <label for="connexion-utilisateur">Nom'dutilisateur</label>
-                <input type="email" placeholder="Email ou ID" id="connexion-utilisateur" class="connexion-utilisateur">
+                <input type="text" placeholder="Email ou ID" name="connexion-utilisateur" id="connexion-utilisateur" class="connexion-utilisateur">
             </div>
 
             <div class="connexion-form-password">
                 <label for="connexion-password">Mot de passe</label>
-                <input type="password" placeholder="Mot de passe" id="connexion-password" class="connexion-password">
+                <input type="password" placeholder="Mot de passe" name="connexion-password" id="connexion-password" class="connexion-password">
             </div>
 
             <input type="submit" value="Se connecter" class="button">
         </form>
+
+        <p id="error-message" style="color:red;"></p>
+
         <a href="creation-compte.php">Pas encore de compte?</a>
      </div>

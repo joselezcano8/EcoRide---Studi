@@ -1,5 +1,4 @@
 <?php
-
 $pageTitle = 'Covoiturages';
 $headerImg = 'img/travel.jpg';
 $titleColor = '--clr-clear';
@@ -21,7 +20,8 @@ include 'inc/header.inc.php';
             <script src="script/script-itineraire.js"></script>
             <script src="script/modal.js"></script>
             <script src="script/reveal-sections.js"></script>
-            <script>window.history.replaceState({}, document.title, window.location.pathname);</script>
+            <script src="script/connexion.js"></script>
+            <!-- <script>window.history.replaceState({}, document.title, window.location.pathname);</script> -->
 
     </body>
 </html>

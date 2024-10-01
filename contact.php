@@ -20,5 +20,6 @@ include 'inc/nav.inc.php';
         <script src="script/script-itineraire.js"></script>
         <script src="script/modal.js"></script>
         <script src="script/reveal-sections.js"></script>
+        <script src="script/connexion.js"></script>
     </body>
 </html>
