@@ -164,6 +164,97 @@
     }
 }
 
+/*Filtres*/
+.form-filtres {
+    display: grid;
+    justify-content: center;
+    background-color: white;
+    border-radius: 15px;
+    padding: 7px 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-bottom: 3rem;
+}
+
+.form-filtres .button {
+    justify-self: center;
+    margin-top: 1rem;
+    color: var(--clr-clear);
+}
+
+.form-filtres-div{
+    display: flex;
+    gap: 2rem;
+    align-items: baseline;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+@media (max-width: 50em) {
+    .form-filtres-div {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+.form-filtres-div label,
+.form-filtres-div p {
+    font-family: var(--ff-secondary);
+    color: var(--clr-dark-op);
+}
+
+.form-filtres input{
+    font-family: var(--ff-secondary);
+    color: var(--clr-dark);
+    text-align: center;
+}
+
+.form-filtres-div div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+input[type="checkbox"] {
+    width: 1.25em;
+    height: 1.25em;
+    border: 1px solid #ddd;
+}
+
+.form-filtres-div input[type="number"] {
+    width: 3rem;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.range {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.voyages {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.filtres {
+    justify-self: left;
+    align-self: baseline;
+}
+
+.filtres a{
+    font-family: var(--ff-secondary);
+    color: var(--clr-dark-op) !important;
+    margin-left: 0.25rem;
+}
+
+.filtres a:hover {
+    text-decoration: underline;
+}
+
 /*Section*/ 
 .section {
     border-top: none;

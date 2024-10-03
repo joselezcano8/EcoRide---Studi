@@ -10,7 +10,6 @@ include 'inc/header.inc.php';
         <main class="main | padding">
             <?php include 'inc/itineraire.inc.php'; ?>
             <section class="voyages | section">
-                <button class="button">Filtres</button>
                 <?php include 'inc/card.sql.inc.php'; ?>
 
             </section>
@@ -21,7 +20,7 @@ include 'inc/header.inc.php';
             <script src="script/modal.js"></script>
             <script src="script/reveal-sections.js"></script>
             <script src="script/connexion.js"></script>
+            <script src="script/range.js"></script>
             <!-- <script>window.history.replaceState({}, document.title, window.location.pathname);</script> -->
-
     </body>
 </html>
