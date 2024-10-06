@@ -1,5 +1,4 @@
-d<?php
-
+<?php
 $pageTitle = 'Détail du Covoiturage';
 $headerImg = 'img/highway.jpg';
 $titleColor = '--clr-dark';
@@ -25,6 +24,7 @@ SELECT
    DATE_FORMAT(c.heure_arrivee, "%Hh%i") AS heure_arrivee_formatee,
    c.prix,
    c.places_disponibles,
+   c.statut,
    vehicule.marque,
    vehicule.modele,
    vehicule.couleur,
@@ -106,7 +106,60 @@ if($ID_covoiturage && $covoiturage): ?>
             <p>Autres préférences: <?php echo htmlspecialchars($covoiturage['preferences']) ?></p>
         </div>
     </section>
-    <button class="button" style="justify-self: center;">Participer</button>
+    
+    <?php 
+    $utilisateur_connecte = isset($_SESSION['user_id']) ? true : false;
+
+    if ($utilisateur_connecte) : {
+            $userID = $_SESSION['user_id'];
+            $chauffeurID = $covoiturage['compte_ID'];
+
+            $query = $conn->prepare('SELECT * FROM participants WHERE ID_covoiturage = ? AND ID_utilisateur = ?');
+            $query->bind_param('ii', $ID_covoiturage, $userID);
+            $query->execute();
+            $result = $query->get_result();
+            $isParticipant = $result->fetch_assoc();
+
+            $isChauffeur = ($userID == $chauffeurID);
+
+            if ($isChauffeur) : ?>
+                <div class="chauffeur-btns" style="justify-self: center;">
+                    <?php if ($covoiturage['statut'] == 'programmé'): ?>
+                        <form action="inc/covoiturage_action.php" method="POST">
+                            <input type="hidden" name="action" value="commencer">
+                            <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                            <button class="button">Commencer le covoiturage</button>
+                        </form>
+                        <form action="inc/covoiturage_action.php" method="POST">
+                            <input type="hidden" name="action" value="annuler">
+                            <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                            <button class="button">Annuler le covoiturage</button>
+                        </form>
+                    <?php elseif ($covoiturage['statut'] == 'commencé'): ?>
+                        <form action="inc/covoiturage_action.php" method="POST">
+                            <input type="hidden" name="action" value="terminer">
+                            <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                            <button class="button">Terminer le covoiturage</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            <?php elseif ($isParticipant): ?>
+                <form action="inc/covoiturage_action.php" method="POST" style="justify-self: center;">
+                    <input type="hidden" name="action" value="annuler_participation">
+                    <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                    <button class="button">Annuler ma participation</button>
+                </form>
+            <?php else: ?>
+                <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
+                    <input type="hidden" name="action" value="participer">
+                    <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                    <button class="button">Participer</button>
+                </form>
+            <?php endif;
+    } else: ?>
+        <button class="button | connexion-btn" style="justify-self: center;">Participer</button>
+    <?php endif; ?>
+
 <?php
 $sqlAvis = '
 SELECT
@@ -172,7 +225,9 @@ $conn->close(); ?>
 <?php include 'inc/footer.inc.php'; ?>
 <script src="script/modal.js"></script>
 <script src="script/reveal-sections.js"></script>
+<script src="script/connexion.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="script/participer.js"></script>
 <script>
         document.addEventListener( 'DOMContentLoaded', function() {
           var splide = new Splide( '.splide' );
@@ -181,4 +236,3 @@ $conn->close(); ?>
       </script>
 </body>
 </html>
-

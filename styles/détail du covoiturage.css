@@ -100,3 +100,9 @@
     height: 25px;
     margin-left: 5px;
 }
+
+/**/
+.chauffeur-btns {
+    display: flex;
+    gap: 1rem;
+}

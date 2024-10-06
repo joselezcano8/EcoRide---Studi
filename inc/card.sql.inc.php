@@ -3,35 +3,35 @@
     <a href="covoiturages.php">effacer filtres</a>
 </div>
 <!-- //////////////////////////////////////////////////////////// -->
-<form action="covoiturages.php" method="POST" class="form-filtres | hidden">
+<form action="covoiturages.php" method="GET" class="form-filtres | hidden">
     <div class="form-filtres-div">
         <div>
             <label for="eco">Voyage écologique</label>
-            <input type="checkbox" name="eco" id="eco" default="" <?php echo isset($_POST['eco']) ? 'checked' : ''; ?>>
+            <input type="checkbox" name="eco" id="eco" default="" <?php echo isset($_GET['eco']) ? 'checked' : ''; ?>>
         </div>
             
         <div>
             <label for="prix">Prix maximum</label>
-            <input type="number" name="prix" id="prix" min="1" step="0.1" value="<?php echo isset($_POST['prix']) ? $_POST['prix'] : ''; ?>">
+            <input type="number" name="prix" id="prix" min="1" step="0.1" value="<?php echo isset($_GET['prix']) ? $_GET['prix'] : ''; ?>">
         </div>
             
         <div>
             <label for="duree">Durée maximale (h)</label>
-            <input type="number" name="duree" id="duree" min="1" value="<?php echo isset($_POST['duree']) ? $_POST['duree'] : ''; ?>">
+            <input type="number" name="duree" id="duree" min="1" value="<?php echo isset($_GET['duree']) ? $_GET['duree'] : ''; ?>">
         </div>
             
         <div>
             <label for="note">Note minimale du covoitureur</label>
             <div class="range">
-                <input type="range" name="note" id="note" min="1" max="5" step="1" default="3" value="<?php echo isset($_POST['note']) ? $_POST['note'] : ''; ?>">
+                <input type="range" name="note" id="note" min="1" max="5" step="1" default="3" value="<?php echo isset($_GET['note']) ? $_GET['note'] : ''; ?>">
                 <p><output id="value"></output></p>
             </div>
         </div>
     </div>
-    <input type="hidden" name="depart" value="<?php echo isset($_POST['depart']) ? $_POST['depart'] : ''; ?>">
-    <input type="hidden" name="arrive" value="<?php echo isset($_POST['arrive']) ? $_POST['arrive'] : ''; ?>">
-    <input type="hidden" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
-    <input type="hidden" name="passagers" value="<?php echo isset($_POST['passagers']) ? $_POST['passagers'] : 1; ?>">
+    <input type="hidden" name="depart" value="<?php echo isset($_GET['depart']) ? $_GET['depart'] : ''; ?>">
+    <input type="hidden" name="arrive" value="<?php echo isset($_GET['arrive']) ? $_GET['arrive'] : ''; ?>">
+    <input type="hidden" name="date" value="<?php echo isset($_GET['date']) ? $_GET['date'] : ''; ?>">
+    <input type="hidden" name="passagers" value="<?php echo isset($_GET['passagers']) ? $_GET['passagers'] : 1; ?>">
     <input type="submit" value="Filtrer" class="button">
 </form>
 <div class="cards">
@@ -41,19 +41,19 @@ require_once 'config.php';
 
 
 // Récupérer les paramètres de recherche
-$depart = isset($_POST['depart']) ? $_POST['depart'] : '';
-$arrive = isset($_POST['arrive']) ? $_POST['arrive'] : '';
-$passagers = isset($_POST['passagers']) ? intval($_POST['passagers']) : 1;
-$date = isset($_POST['date']) ? $_POST['date'] : '';
+$depart = isset($_GET['depart']) ? $_GET['depart'] : '';
+$arrive = isset($_GET['arrive']) ? $_GET['arrive'] : '';
+$passagers = isset($_GET['passagers']) ? intval($_GET['passagers']) : 1;
+$date = isset($_GET['date']) ? $_GET['date'] : '';
 if ($passagers < 1) {
     $passagers = 1;
 }
 
 //////////////////////////////////////////////////
-$eco = isset($_POST['eco']) ? $_POST['eco'] : '';
-$duree = isset($_POST['duree']) ? intval($_POST['duree']) : '';
-$prix = isset($_POST['prix']) && is_numeric($_POST['prix']) ? (float)$_POST['prix'] : '';
-$note = isset($_POST['note']) ? $_POST['note'] : 1;
+$eco = isset($_GET['eco']) ? $_GET['eco'] : '';
+$duree = isset($_GET['duree']) ? intval($_GET['duree']) : '';
+$prix = isset($_GET['prix']) && is_numeric($_GET['prix']) ? (float)$_GET['prix'] : '';
+$note = isset($_GET['note']) ? $_GET['note'] : 1;
 
 $searchPerformed = false;
 if (!empty($depart) && !empty($arrive)) {
@@ -194,7 +194,7 @@ if ($searchPerformed) {
                     <h2><?php echo $prix; ?> Crédits</h2>
                 </div>
                 <div class="card-button">
-                    <form action="detail-covoiturage.php" method="POST">
+                    <form action="detail-covoiturage.php" method="GET">
                         <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
                         <button type="submit" class="button">Détail</button>
                     </form>

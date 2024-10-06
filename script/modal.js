@@ -5,7 +5,7 @@ const closeModal = document.querySelector('.mobile-close-modal');
 const overlay = document.querySelector('.overlay');
 const menu = document.querySelector('.menu');
 
-const connexionBtn = document.querySelector('.connexion-btn');
+const connexionBtn = document.querySelectorAll('.connexion-btn');
 const connexionLink = document.querySelector('.connexion-link')
 const connexionMenu = document.querySelector('.connexion-menu')
 
@@ -29,10 +29,12 @@ openModal.addEventListener('click', function(e) {
 });
 
 //Modal Connexion
-connexionBtn.addEventListener('click', function(e) {
-        overlay.classList.remove('hidden');
-        connexionMenu.classList.remove('hidden');
-});
+connexionBtn.forEach(btn => 
+    btn.addEventListener('click', function(e) {
+    overlay.classList.remove('hidden');
+    connexionMenu.classList.remove('hidden');
+})
+)
 
 connexionLink.addEventListener('click', function(e) {
     connexionMenu.classList.remove('hidden');
