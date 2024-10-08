@@ -1,3 +1,5 @@
-.header {
-
-}
+.header h3 {
+    font-size: var(--fs-secondary-heading);
+    font-weight: var(--fw-semi-bold);
+    margin-top: 170px;
+ }
