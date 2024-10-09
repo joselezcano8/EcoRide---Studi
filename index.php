@@ -27,7 +27,7 @@ include 'inc/header.inc.php';
                 </div>
                 <img src="img/woman_smiling.jpg" alt="">
             </section>
-            <section class="section | contactez-nous">
+            <section class="contactez-nous">
                 <h2>Contactez-nous</h2>
                 <p>Pour toute question ou demande d'information, n'hésitez pas à nous contacter. Nous sommes là pour vous aider et nous nous engageons à répondre à vos besoins dans les plus brefs délais.</p>
                 <a href="contact.php"><button class="button">Nous Contacter</button></a>

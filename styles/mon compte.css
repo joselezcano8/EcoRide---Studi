@@ -1,5 +1,186 @@
+input[type="text"]:not(:last-of-type), input[type="date"], select {
+    text-transform: capitalize !important;
+}
+
 .header h3 {
+    margin-top: 170px;
     font-size: var(--fs-secondary-heading);
     font-weight: var(--fw-semi-bold);
-    margin-top: 170px;
- }
+}
+
+.main h2 {
+    padding: 3rem;
+    text-align: center;
+}
+
+/*RESERVATIONS*/
+
+.main h3 {
+    font-family: var(--ff-primary) !important;
+    color: var(--clr-dark) !important;
+    font-weight: var(--fw-semi-bold);
+    font-size: var(--fs-700);
+    text-align: center;
+}
+
+.reservations {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+ul {
+    list-style: none;
+}
+
+ul a{
+    color: var(--clr-dark) !important;
+}
+
+ul a:hover {
+    text-decoration: underline !important;
+    color: var(--clr-primary) !important;
+}
+
+/*AJOUTER VEHICULE*/
+
+.ajouter-vehicule {
+    background-color: var(--clr-dark);
+    color: var(--clr-clear);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ajouter-vehicule form {
+    display: grid;
+}
+
+.ajouter-vehicule h3 {
+    color: var(--clr-clear) !important;
+    margin-bottom: 2rem;
+}
+
+.ajouter-vehicule h4 {
+    font-weight: 700 !important;
+    font-size: var(--fs-500);
+}
+
+.ajouter-vehicule-form {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--ff-secondary);
+    margin-bottom: 2rem;
+}
+
+.ajouter-vehicule-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ajouter-vehicule-form input[type='text'],
+.ajouter-vehicule-form input[type='date'],
+.ajouter-vehicule-form input[type='number'] {
+    width: 200px;
+    text-transform: capitalize !important;
+    border-radius: 15px;
+    padding-left: 5px;
+    color: var(--clr-dark-bg) !important;
+}
+
+input[type="checkbox"] {
+    width: 1.25em;
+    height: 1.25em;
+    border: 1px solid #ddd;
+    border-radius: 5px !important;
+}
+
+.info-voiture-form {
+    text-align: right;
+}
+
+.ajouter-vehicule-form textarea {
+    resize: none;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.ajouter-vehicule .button {
+    margin: auto !important;
+    color: var(--clr-primary);
+    background-color: var(--clr-clear);
+}
+
+.ajouter-vehicule .button:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-clear);
+}
+
+/* TRAJETS */
+
+.trajets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+    min-height: 15rem;
+}
+
+.saisir-trajets {
+    background-color: var(--clr-dark);
+    color: var(--clr-clear);
+    padding: 3rem;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.saisir-trajets h3 {
+    color: var(--clr-clear) !important;
+    margin-bottom: 2rem;
+}
+
+.saisir-trajets form {
+    display: grid;
+}
+
+.saisir-trajets-form {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--ff-secondary);
+    margin-bottom: 2rem;
+}
+
+.saisir-trajets-form div {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 0.5rem;
+}
+
+.saisir-trajets-form input[type='text'],
+.saisir-trajets-form input[type='date'],
+.saisir-trajets-form input[type='number'],
+.saisir-trajets-form input[type='time'],
+.saisir-trajets-form select {
+    width: 200px;
+    text-transform: capitalize !important;
+    border-radius: 15px;
+    padding-left: 5px;
+    color: var(--clr-dark-bg) !important;
+}
+
+.saisir-trajets .button {
+    margin: auto;
+    color: var(--clr-primary);
+    background-color: var(--clr-clear);
+}
+
+.saisir-trajets .button:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-clear);
+}

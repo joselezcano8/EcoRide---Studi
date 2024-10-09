@@ -60,22 +60,21 @@ if($result->num_rows > 0) {
 } else echo('<div style="height: 40%"><p style="text-align: center">Covoiturage non trouvé. <a href="covoiturages.php">Retour à la liste des covoiturages</a></p></div>');
 
 $covoiturage = isset($covoiturage) ? $covoiturage : null;
-if ($covoiturage) {
+if ($covoiturage && !empty($covoiturage['date'])) {
     setlocale(LC_TIME, 'fr_FR.UTF-8');
-    $timestamp = strtotime($covoiturage['date']);
-    
-    // Formater la date avec strftime()
-    $date_formatee = strftime('%d %B %Y', $timestamp);
-    // Vérifier si la date est valide
-    if (!empty($covoiturage['date'])) {
-    // Convertir la date en timestamp
-        $timestamp = strtotime($covoiturage['date']);
-    // Formater la date
-        $date_formatee = strftime('%d %B %Y', $timestamp);
-    } else {
-        $date_formatee = '';
-    }
-} else;
+    $dateObj = DateTime::createFromFormat('Y-m-d', $covoiturage['date']);
+    $formatter = new IntlDateFormatter(
+        'fr_FR', 
+        IntlDateFormatter::LONG, 
+        IntlDateFormatter::NONE, 
+        'Europe/Paris', 
+        IntlDateFormatter::GREGORIAN, 
+        'd MMMM yyyy'
+    );
+    $date_formatee = $formatter->format($dateObj);
+} else {
+    $date_formatee = '';
+}
 
 
 
@@ -182,7 +181,7 @@ $stmtAvis->execute();
 $resultAvis = $stmtAvis->get_result();
     
 if ($resultAvis->num_rows > 0) { ?>
-    <section class="splide | section">
+    <section class="splide">
         <div class="avis | splide__track | padding">
             <h2>Avis du Chauffeur</h2>
             <ul class="splide__list">
