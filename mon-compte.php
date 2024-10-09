@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['declarer_chauffeur']))
 }
 ?>
 
-    <main class="main">
+    <main class="main | section">
         <h2>Bienvenue sur votre compte <?php echo $pseudo ?> </h2>
 
         <div class="reservations | padding">
@@ -241,9 +241,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['declarer_chauffeur']))
                     </div>
 
         <!-- Bouton de déconnexion -->
-        <form action="inc/logout.php" method="POST">
-            <button type="submit" class="button">Déconnexion</button>
-        </form>
+        <div class="deconnexion">
+            <form action="inc/logout.php" method="POST">
+                <button type="submit" class="button">Déconnexion</button>
+            </form>
+        </div>
     
     </main>
 

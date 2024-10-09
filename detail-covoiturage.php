@@ -22,6 +22,8 @@ SELECT
    c.date,
    DATE_FORMAT(c.heure_depart, "%Hh%i") AS heure_depart_formatee,
    DATE_FORMAT(c.heure_arrivee, "%Hh%i") AS heure_arrivee_formatee,
+   c.lieu_depart,
+   c.lieu_arrivee,
    c.prix,
    c.places_disponibles,
    c.statut,
@@ -85,18 +87,21 @@ if($ID_covoiturage && $covoiturage): ?>
         <div class="infos">
             <h3>Informations du Covoiturage</h3>
             <p>Pseudo du chauffeur: <?php echo htmlspecialchars($covoiturage['pseudo']) ?></p>
+            <p>Lieu de Départ: <?php echo htmlspecialchars($covoiturage['lieu_depart']) ?></p>
+            <p>Lieu d'Arrivée: <?php echo htmlspecialchars($covoiturage['lieu_arrivee']) ?></p>
             <p>Nombre de places restantes: <?php echo htmlspecialchars($covoiturage['places_disponibles']) ?> places restantes</p>
             <p>Prix: <?php echo htmlspecialchars($covoiturage['prix']) ?> crédits</p>
             <p>Date et Heure de Départ: <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_depart_formatee']); ?></p>
             <p>Date et Heure d'Arrivée: <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_arrivee_formatee']); ?></p>
             <p>Voyage ecologique: <?php echo $covoiturage['eco'] ? 'Oui' : 'Non'; ?></p>
+            <p>Statut: <?php echo ucfirst(htmlspecialchars($covoiturage['statut'])) ?></p>
         </div>
         <div class="details-vehicule">
             <h3>Détails du Véhicule</h3>
             <p>Marque: <?php echo htmlspecialchars($covoiturage['marque']) ?></p>
             <p>Modéle: <?php echo htmlspecialchars($covoiturage['modele']) ?></p>
             <p>Couleur: <?php echo htmlspecialchars($covoiturage['couleur']) ?></p>
-            <p>Plaque: <?php echo htmlspecialchars($covoiturage['plaque']) ?></p>
+            <p>Plaque: <?php echo strtoupper(htmlspecialchars($covoiturage['plaque'])) ?></p>
         </div>
         <div class="preferences">
             <h3>Préferénces du Conducteur</h3>

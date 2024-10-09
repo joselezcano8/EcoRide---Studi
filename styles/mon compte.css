@@ -18,7 +18,7 @@ input[type="text"]:not(:last-of-type), input[type="date"], select {
 .main h3 {
     font-family: var(--ff-primary) !important;
     color: var(--clr-dark) !important;
-    font-weight: var(--fw-semi-bold);
+    font-weight: 700 !important;
     font-size: var(--fs-700);
     text-align: center;
 }
@@ -106,6 +106,8 @@ input[type="checkbox"] {
     border-radius: 10px;
     padding-left: 5px;
     padding-top: 5px;
+    height: 4.5rem !important;
+    width: 300px;
 }
 
 .ajouter-vehicule .button {
@@ -117,6 +119,20 @@ input[type="checkbox"] {
 .ajouter-vehicule .button:hover {
     background-color: var(--clr-primary);
     color: var(--clr-clear);
+}
+
+@media (max-width: 50em) {
+    .ajouter-vehicule-form {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-voiture-form label{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /* TRAJETS */
@@ -183,4 +199,31 @@ input[type="checkbox"] {
 .saisir-trajets .button:hover {
     background-color: var(--clr-primary);
     color: var(--clr-clear);
+}
+
+@media (max-width: 50em) {
+    .saisir-trajets-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 30em) {
+    .saisir-trajets-form div label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/*Deconnexion*/
+
+.deconnexion {
+    height: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 3rem;
 }
