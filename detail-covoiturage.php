@@ -86,28 +86,28 @@ if($ID_covoiturage && $covoiturage): ?>
     <section class="info-covoiturage | padding | section">
         <div class="infos">
             <h3>Informations du Covoiturage</h3>
-            <p>Pseudo du chauffeur: <?php echo htmlspecialchars($covoiturage['pseudo']) ?></p>
-            <p>Lieu de Départ: <?php echo htmlspecialchars($covoiturage['lieu_depart']) ?></p>
-            <p>Lieu d'Arrivée: <?php echo htmlspecialchars($covoiturage['lieu_arrivee']) ?></p>
-            <p>Nombre de places restantes: <?php echo htmlspecialchars($covoiturage['places_disponibles']) ?> places restantes</p>
-            <p>Prix: <?php echo htmlspecialchars($covoiturage['prix']) ?> crédits</p>
-            <p>Date et Heure de Départ: <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_depart_formatee']); ?></p>
-            <p>Date et Heure d'Arrivée: <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_arrivee_formatee']); ?></p>
-            <p>Voyage ecologique: <?php echo $covoiturage['eco'] ? 'Oui' : 'Non'; ?></p>
-            <p>Statut: <?php echo ucfirst(htmlspecialchars($covoiturage['statut'])) ?></p>
+            <p><strong>&bullet; Pseudo du chauffeur:</strong> <?php echo htmlspecialchars($covoiturage['pseudo']) ?></p>
+            <p><strong>&bullet; Lieu de Départ:</strong> <?php echo htmlspecialchars($covoiturage['lieu_depart']) ?></p>
+            <p><strong>&bullet; Lieu d'Arrivée:</strong> <?php echo htmlspecialchars($covoiturage['lieu_arrivee']) ?></p>
+            <p><strong>&bullet; Nombre de places restantes:</strong> <?php echo htmlspecialchars($covoiturage['places_disponibles']) ?> places restantes</p>
+            <p><strong>&bullet; Prix:</strong> <?php echo htmlspecialchars($covoiturage['prix']) ?> crédits</p>
+            <p><strong>&bullet; Date et Heure de Départ:</strong> <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_depart_formatee']); ?></p>
+            <p><strong>&bullet; Date et Heure d'Arrivée:</strong> <?php echo htmlspecialchars($date_formatee); ?>, <?php echo htmlspecialchars($covoiturage['heure_arrivee_formatee']); ?></p>
+            <p><strong>&bullet; Voyage ecologique:</strong> <?php echo $covoiturage['eco'] ? 'Oui' : 'Non'; ?></p>
+            <p><strong>&bullet; Statut:</strong> <?php echo ucfirst(htmlspecialchars($covoiturage['statut'])) ?></p>
         </div>
         <div class="details-vehicule">
             <h3>Détails du Véhicule</h3>
-            <p>Marque: <?php echo htmlspecialchars($covoiturage['marque']) ?></p>
-            <p>Modéle: <?php echo htmlspecialchars($covoiturage['modele']) ?></p>
-            <p>Couleur: <?php echo htmlspecialchars($covoiturage['couleur']) ?></p>
-            <p>Plaque: <?php echo strtoupper(htmlspecialchars($covoiturage['plaque'])) ?></p>
+            <p><strong>&bullet; Marque:</strong> <?php echo htmlspecialchars($covoiturage['marque']) ?></p>
+            <p><strong>&bullet; Modéle:</strong> <?php echo htmlspecialchars($covoiturage['modele']) ?></p>
+            <p><strong>&bullet; Couleur:</strong> <?php echo htmlspecialchars($covoiturage['couleur']) ?></p>
+            <p><strong>&bullet; Plaque:</strong> <?php echo strtoupper(htmlspecialchars($covoiturage['plaque'])) ?></p>
         </div>
         <div class="preferences">
             <h3>Préferénces du Conducteur</h3>
-            <p>Animaux: <?php echo $covoiturage['animaux'] ? 'Acceptés' : 'Non'; ?></p>
-            <p>Fumeurs: <?php echo $covoiturage['fumeur'] ? 'Acceptés' : 'Non'; ?></p>
-            <p>Autres préférences: <?php echo htmlspecialchars($covoiturage['preferences']) ?></p>
+            <p><strong>&bullet; Animaux:</strong> <?php echo $covoiturage['animaux'] ? 'Acceptés' : 'Non'; ?></p>
+            <p><strong>&bullet; Fumeurs:</strong> <?php echo $covoiturage['fumeur'] ? 'Acceptés' : 'Non'; ?></p>
+            <p><strong>&bullet; Autres préférences:</strong> <?php echo htmlspecialchars($covoiturage['preferences']) ?></p>
         </div>
     </section>
     
@@ -147,18 +147,22 @@ if($ID_covoiturage && $covoiturage): ?>
                         </form>
                     <?php endif; ?>
                 </div>
-            <?php elseif ($isParticipant): ?>
-                <form action="inc/covoiturage_action.php" method="POST" style="justify-self: center;">
-                    <input type="hidden" name="action" value="annuler_participation">
-                    <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
-                    <button class="button">Annuler ma participation</button>
-                </form>
-            <?php else: ?>
-                <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
-                    <input type="hidden" name="action" value="participer">
-                    <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
-                    <button class="button">Participer</button>
-                </form>
+            <?php elseif ($isParticipant):
+                if ($covoiturage['statut'] == 'programmé'): ?>
+                    <form action="inc/covoiturage_action.php" method="POST" style="justify-self: center;">
+                        <input type="hidden" name="action" value="annuler_participation">
+                        <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                        <button class="button">Annuler ma participation</button>
+                    </form>
+                <?php elseif ($covoiturage['statut'] == 'terminé'): ?>
+                    <button class="button" style="justify-self: center;">Donner un avis</button>
+                <?php endif;
+            elseif ($covoiturage['statut'] == 'programmé'): ?>
+                    <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
+                        <input type="hidden" name="action" value="participer">
+                        <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                        <button class="button">Participer</button>
+                    </form>
             <?php endif;
     } else: ?>
         <button class="button | connexion-btn" style="justify-self: center;">Participer</button>

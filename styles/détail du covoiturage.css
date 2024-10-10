@@ -16,8 +16,21 @@
     border: none;
 }
 
+.info-covoiturage div{
+    background-color: white !important;
+    padding: 24px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    gap: 0.5em;
+}
+
 .info-covoiturage p {
+    color: var(--clr-dark-op) !important;
+}
+
+strong {
     color: var(--clr-dark) !important;
+    font-weight: var(--fw-semi-bold) !important;
 }
 
 .info-covoiturage h3 {
@@ -32,9 +45,9 @@
     margin-bottom: 3rem;
 }
 
-@media (max-width: 60em) {
+@media (max-width: 75em) {
     .info-covoiturage {
-        grid-template-columns: 450px;
+        grid-template-columns: 550px;
         justify-content: center;
     }
 }
