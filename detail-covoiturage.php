@@ -126,6 +126,13 @@ if($ID_covoiturage && $covoiturage): ?>
 
             $isChauffeur = ($userID == $chauffeurID);
 
+            $stmtAvis = $conn->prepare('SELECT COUNT(*) FROM avis WHERE ID_passager = ? AND ID_chauffeur = ?');
+            $stmtAvis->bind_param('ii', $userID, $chauffeurID);
+            $stmtAvis->execute();
+            $stmtAvis->bind_result($count);
+            $stmtAvis->fetch();
+            $stmtAvis->close();
+
             if ($isChauffeur) : ?>
                 <div class="chauffeur-btns" style="justify-self: center;">
                     <?php if ($covoiturage['statut'] == 'programmé'): ?>
@@ -154,7 +161,8 @@ if($ID_covoiturage && $covoiturage): ?>
                         <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
                         <button class="button">Annuler ma participation</button>
                     </form>
-                <?php elseif ($covoiturage['statut'] == 'terminé'): ?>
+                <?php
+                 elseif ($covoiturage['statut'] == 'terminé' && $count == 0): ?>
                     <button class="button  | avis-btn" style="justify-self: center;">Donner un avis</button>
                 <?php endif;
             elseif ($covoiturage['statut'] == 'programmé'): ?>
