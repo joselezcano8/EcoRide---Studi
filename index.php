@@ -5,11 +5,13 @@ $headerImg = 'img/car_road.jpg';
 $titleColor = '--clr-clear';
 $firstTitle = 'EcoRide';
 $secondTitle = 'Votre trajet, notre planète.';
+/* Header */
 include 'inc/header.inc.php';
 
 ?>
 
     <main class="main"> 
+        <!-- Itineraire -->
         <?php include 'inc/itineraire.inc.php'; ?>
         <!--Sections-->
         <section class="section | objectif | padding">
@@ -34,7 +36,10 @@ include 'inc/header.inc.php';
             </section>
         </main>
 
+        <!-- Footer -->
         <?php include 'inc/footer.inc.php'; ?>
+
+        <!-- JavaScript -->
         <script src="script/script-itineraire.js"></script>
         <script src="script/modal.js"></script>
         <script src="script/reveal-sections.js"></script>

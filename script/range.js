@@ -1,3 +1,5 @@
+'use strict';
+
 const value = document.getElementById("value");
 const input = document.getElementById("note");
 const btnFiltre = document.querySelector(".btn-filtres");

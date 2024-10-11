@@ -1,8 +1,8 @@
+<!-- Filtres de Recherche -->
 <div class="filtres">
     <button class="button | btn-filtres">Filtres</button>
     <a href="covoiturages.php">effacer filtres</a>
 </div>
-<!-- //////////////////////////////////////////////////////////// -->
 <form action="covoiturages.php" method="GET" class="form-filtres | hidden">
     <div class="form-filtres-div">
         <div>
@@ -28,6 +28,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Input de Itineraire -->
     <input type="hidden" name="depart" value="<?php echo isset($_GET['depart']) ? $_GET['depart'] : ''; ?>">
     <input type="hidden" name="arrive" value="<?php echo isset($_GET['arrive']) ? $_GET['arrive'] : ''; ?>">
     <input type="hidden" name="date" value="<?php echo isset($_GET['date']) ? $_GET['date'] : ''; ?>">
@@ -37,6 +39,8 @@
 <div class="cards">
 <?php
 
+
+/* Connexion à la base de données */
 require_once 'config.php';
 
 
@@ -49,13 +53,12 @@ if ($passagers < 1) {
     $passagers = 1;
 }
 
-//////////////////////////////////////////////////
 $eco = isset($_GET['eco']) ? $_GET['eco'] : '';
 $duree = isset($_GET['duree']) ? intval($_GET['duree']) : '';
 $prix = isset($_GET['prix']) && is_numeric($_GET['prix']) ? (float)$_GET['prix'] : '';
 $note = isset($_GET['note']) ? $_GET['note'] : 1;
 
-$searchPerformed = false;
+$searchPerformed = false; // Variable pour vérifier si une recherche a été effectuée
 if (!empty($depart) && !empty($arrive)) {
     $searchPerformed = true;
 }
@@ -84,8 +87,8 @@ WHERE
     c.statut = "programme"
 ';
 
-$params = [];
-$types  = '';
+$params = []; // Tableau pour stocker les paramètres de la requête
+$types  = ''; // Chaîne pour stocker les types des paramètres
 
 // Ajouter des conditions en fonction des paramètres fournis
 if (!empty($depart)) {
@@ -152,9 +155,10 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 
+// Vérifier si une recherche a été effectuée
 if ($searchPerformed) {
     if ($result->num_rows > 0) {
+        // Afficher les résultats si des covoiturages sont disponibles
         while ($row = $result->fetch_assoc()) {
         $chauffeurPseudo = htmlspecialchars($row['chauffeur_pseudo']);
         $chauffeurNote = htmlspecialchars($row['chauffeur_note']);
@@ -210,6 +214,7 @@ else {
     echo '</div><p>Veuillez indiquer le lieu de départ, d\'arrivée, la date et le nombre de passagers...</p>';
 }
 
+// Fermer la déclaration
 $stmt->close();
 $conn->close();
 ?>

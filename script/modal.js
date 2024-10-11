@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const openModal = document.querySelector('.mobile-open-modal');
 const closeModal = document.querySelector('.mobile-close-modal');

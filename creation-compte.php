@@ -21,6 +21,8 @@
             <img class="logo" src="img/logo_primary.png" alt="Logo Eco Ride">
         </a>
     </header>
+    
+    <!-- Form de creation de compte -->
     <main class="creation-compte | section">
         <form action="" class="form-cration-compte">
         <h1>Creation de compte</h1>
@@ -44,6 +46,8 @@
             <input type="submit" value="S'inscrire" class="button">
         </form>
     </main>
+
+    <!-- Footer et JavaScript -->
     <?php include 'inc/footer.inc.php'; ?>
     <script src="script/reveal-sections.js"></script>
 </body>

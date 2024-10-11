@@ -4,40 +4,39 @@ $headerImg = 'img/woman_driving.jpg';
 $titleColor = '--clr-clear';
 $firstTitle = '';
 $secondTitle = 'Mon espace utilisateur';
+
+// Header
 include 'inc/header.inc.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ecoride";
+// Connexion à la base de données
+include 'inc/config.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) die("Connexion échouée: " . $conn->connect_error);
-
+// Vérification si l'utilisateur est connecté, sinon rediriger vers la page de connexion
 if (!isset($_SESSION['user_id'])) {
     header('Location: connexion.php');
     exit;
 }
 
+// Récupération de l'ID utilisateur depuis la session
 $userID = $_SESSION['user_id'];
 
+// Requête pour obtenir le pseudo de l'utilisateur connecté
 $stmt = $conn->prepare('SELECT pseudo FROM compte WHERE ID = ?');
 $stmt->bind_param('i', $userID);
 $stmt->execute();
 $pseudo = $stmt->get_result()->fetch_assoc()['pseudo'];
 $stmt->close();
 
+// Vérification si l'utilisateur est un chauffeur
 $stmt = $conn->prepare('SELECT ID FROM chauffeur WHERE ID = ?');
 $stmt->bind_param('i', $userID);
 $stmt->execute();
 $stmt->bind_result($ID);
 $stmt->fetch();
 $stmt->close();
-
 $isChauffeur = isset($ID);
 
-
+// Liste des marques et modèles de véhicules considérés comme écologiques
 $marques_ecologiques = [
     "Tesla", "Rivian", "Lucid", "NIO", "Fisker", "Polestar", "XPeng", "BYTON",
     "Faraday Future", "Aptera", "Lordstown", "Canoo", "Bollinger", "Sono Motors", "Lightyear"
@@ -54,8 +53,9 @@ $modeles_ecologiques = [
     "Volvo XC40 Recharge", "Volvo C40 Recharge"
 ];
 
-
+// Vérification de l'ajout d'un véhicule par le chauffeur
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_vehicule'])) {
+    // Traitement des champs du formulaire pour ajouter un véhicule
     $plaque = ucfirst(strtolower(trim($_POST['plaque'])));
     $date_plaque = $_POST['date_plaque'];
     $marque = ucfirst(strtolower(trim($_POST['marque'])));
@@ -66,18 +66,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_vehicule'])) {
     $animaux = isset($_POST['animaux']) ? 1 : 0;
     $preferences = ($_POST['preferences']);
 
+    // Vérification si le véhicule est écologique
     $eco = false;
     if (in_array($marque, $marques_ecologiques) || in_array($modele, $modeles_ecologiques)) {
         $eco = true;
     }
 
+    // Insertion du véhicule dans la base de données
     $stmt = $conn->prepare('INSERT INTO vehicule (ID_chauffeur, plaque, date_plaque, marque, modele, couleur, nombre_de_places, fumeur, animaux, preferences, eco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->bind_param('isssssiiisi', $ID, $plaque, $date_plaque, $marque, $modele, $couleur, $nombre_de_places, $fumeur, $animaux, $preferences, $eco);
     $stmt->execute();
     $stmt->close();
 }
 
+// Vérification de l'ajout d'un trajet par le chauffeur
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_trajet'])) {
+    // Traitement des champs du formulaire pour ajouter un trajet
     $adresse_depart = ucfirst(strtolower(trim($_POST['adresse_depart'])));
     $adresse_arrivee = ucfirst(strtolower(trim($_POST['adresse_arrivee'])));
     $heure_depart = $_POST['heure_depart'];
@@ -86,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_trajet'])) {
     $prix = $_POST['prix'];
     $vehicule_id = $_POST['vehicule'];
 
+    // Récupération du nombre de places disponibles pour le véhicule sélectionné
     $stmt = $conn->prepare('SELECT nombre_de_places FROM vehicule WHERE ID_vehicule = ?');
     $stmt->bind_param('i', $vehicule_id);
     $stmt->execute();
@@ -94,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_trajet'])) {
     $places_disponibles = $vehicule_data['nombre_de_places'];
     $stmt->close();
 
+    // Insertion du trajet dans la base de données
     $stmtTrajet = $conn->prepare('INSERT INTO covoiturage (ID_vehicule, lieu_depart, lieu_arrivee, heure_depart, heure_arrivee, date, prix, statut, places_disponibles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $statut = 'programmé';
     $stmtTrajet->bind_param('isssssisi', $vehicule_id, $adresse_depart, $adresse_arrivee, $heure_depart, $heure_arrivee, $date, $prix, $statut, $places_disponibles);
@@ -105,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_trajet'])) {
     $stmtTrajet->close();
 }
 
+// Récupération de l'historique de réservations de l'utilisateur
 $reservations = [];
 $stmt = $conn->prepare('SELECT * FROM participants WHERE ID_utilisateur = ?');
 $stmt->bind_param('i', $userID);
@@ -115,7 +122,7 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-
+// Récupération des trajets du chauffeur si applicable
 $trajets = [];
 if ($isChauffeur) {
     $stmt = $conn->prepare('SELECT * FROM covoiturage c JOIN vehicule v ON c.ID_vehicule = v.ID_vehicule WHERE v.ID_chauffeur = ?');
@@ -128,6 +135,7 @@ if ($isChauffeur) {
     $stmt->close();
 }
 
+// Traitement du formulaire pour devenir chauffeur
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['declarer_chauffeur'])) {
     $query = 'INSERT INTO chauffeur (ID) VALUES (?)';
     $stmt = $conn->prepare($query);
@@ -200,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['declarer_chauffeur']))
             <?php endif; ?>
         </div>
 
+        <!-- Saisir trajets -->
         <div class="saisir-trajets | padding">
             <h3>Saisir un Nouveau Trajet</h3>
             <form action="" method="POST">
@@ -249,7 +258,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['declarer_chauffeur']))
     
     </main>
 
+    <!-- Footer -->
         <?php include 'inc/footer.inc.php'; ?>
+
+        <!-- JavaScript -->
         <script src="script/script-itineraire.js"></script>
         <script src="script/modal.js"></script>
         <script src="script/reveal-sections.js"></script>

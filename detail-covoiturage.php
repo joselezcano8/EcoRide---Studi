@@ -4,7 +4,11 @@ $headerImg = 'img/highway.jpg';
 $titleColor = '--clr-dark';
 $firstTitle = '';
 $secondTitle = 'Détail du Covoiturage';
+
+// Header
 include 'inc/header.inc.php';
+
+// Connexion à la base de données
 require_once 'inc/config.php';
 
 //Récuperer l'ID Covoiturage
@@ -15,6 +19,7 @@ else {
     echo('<p>ID covoiturage invalide</p>');
 }
 
+// Requête pour récupérer les détails du covoiturage
 $sql = '
 SELECT
    c.ID_covoiturage,
@@ -48,19 +53,23 @@ JOIN
 WHERE
     c.ID_covoiturage = ?';
 
+// Préparer la requête
 $stmt = $conn->prepare($sql);
 if($stmt === false) {
     die('Erreur lors de la préparation de la requête : ' . $conn->error);
 }
 
+// Lier le paramètre et exécuter la requête
 $stmt->bind_param('i', $ID_covoiturage);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Vérifier si le covoiturage existe
 if($result->num_rows > 0) {
     $covoiturage = $result->fetch_assoc();
 } else echo('<div style="height: 40%"><p style="text-align: center">Covoiturage non trouvé. <a href="covoiturages.php">Retour à la liste des covoiturages</a></p></div>');
 
+// Formatter la date
 $covoiturage = isset($covoiturage) ? $covoiturage : null;
 if ($covoiturage && !empty($covoiturage['date'])) {
     setlocale(LC_TIME, 'fr_FR.UTF-8');
@@ -78,8 +87,7 @@ if ($covoiturage && !empty($covoiturage['date'])) {
     $date_formatee = '';
 }
 
-
-
+// Afficher les informations du covoiturage si disponibles
 $ID_covoiturage = isset($ID_covoiturage) ? $ID_covoiturage : null;
 if($ID_covoiturage && $covoiturage): ?>
 <main class="main">
@@ -114,18 +122,22 @@ if($ID_covoiturage && $covoiturage): ?>
     <?php 
     $utilisateur_connecte = isset($_SESSION['user_id']) ? true : false;
 
+    // Vérifier si l'utilisateur est connecté
     if ($utilisateur_connecte) : {
             $userID = $_SESSION['user_id'];
             $chauffeurID = $covoiturage['compte_ID'];
 
+            // Vérifier si l'utilisateur participe au covoiturage
             $query = $conn->prepare('SELECT * FROM participants WHERE ID_covoiturage = ? AND ID_utilisateur = ?');
             $query->bind_param('ii', $ID_covoiturage, $userID);
             $query->execute();
             $result = $query->get_result();
             $isParticipant = $result->fetch_assoc();
 
+            // Vérifier si l'utilisateur est le chauffeur
             $isChauffeur = ($userID == $chauffeurID);
 
+            // Vérifier si l'utilisateur a déjà donné un avis
             $stmtAvis = $conn->prepare('SELECT COUNT(*) FROM avis WHERE ID_passager = ? AND ID_chauffeur = ?');
             $stmtAvis->bind_param('ii', $userID, $chauffeurID);
             $stmtAvis->execute();
@@ -133,6 +145,7 @@ if($ID_covoiturage && $covoiturage): ?>
             $stmtAvis->fetch();
             $stmtAvis->close();
 
+            // Afficher les boutons pour le chauffeur
             if ($isChauffeur) : ?>
                 <div class="chauffeur-btns" style="justify-self: center;">
                     <?php if ($covoiturage['statut'] == 'programmé'): ?>
@@ -154,7 +167,9 @@ if($ID_covoiturage && $covoiturage): ?>
                         </form>
                     <?php endif; ?>
                 </div>
-            <?php elseif ($isParticipant):
+            <?php 
+            // Afficher les boutons pour les passagers
+            elseif ($isParticipant):
                 if ($covoiturage['statut'] == 'programmé'): ?>
                     <form action="inc/covoiturage_action.php" method="POST" style="justify-self: center;">
                         <input type="hidden" name="action" value="annuler_participation">
@@ -162,19 +177,19 @@ if($ID_covoiturage && $covoiturage): ?>
                         <button class="button">Annuler ma participation</button>
                     </form>
                 <?php
-                 elseif ($covoiturage['statut'] == 'terminé' && $count == 0): ?>
+                elseif ($covoiturage['statut'] == 'terminé' && $count == 0): ?>
                     <button class="button  | avis-btn" style="justify-self: center;">Donner un avis</button>
                 <?php endif;
-            elseif ($covoiturage['statut'] == 'programmé'): ?>
-                    <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
-                        <input type="hidden" name="action" value="participer">
-                        <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
-                        <button class="button">Participer</button>
-                    </form>
-            <?php endif;
-    } else: ?>
-        <button class="button | connexion-btn" style="justify-self: center;">Participer</button>
-    <?php endif; ?>
+                elseif ($covoiturage['statut'] == 'programmé'): ?>
+                        <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
+                            <input type="hidden" name="action" value="participer">
+                            <input type="hidden" name="ID_covoiturage" value="<?php echo $ID_covoiturage; ?>">
+                            <button class="button">Participer</button>
+                        </form>
+                <?php endif;
+            } else: ?>
+                <button class="button | connexion-btn" style="justify-self: center;">Participer</button>
+            <?php endif; ?>
 
     <!-- Donner Avis -->
      <div class="donner-avis | hidden">
@@ -203,6 +218,7 @@ if($ID_covoiturage && $covoiturage): ?>
      </div>
 
 <?php
+// Requête pour récupérer les avis
 $sqlAvis = '
 SELECT
 compte.pseudo,
@@ -215,15 +231,18 @@ JOIN compte ON avis.ID_passager = compte.ID
 JOIN covoiturage ON covoiturage.ID_vehicule = vehicule.ID_vehicule
 WHERE covoiturage.ID_covoiturage = ? AND avis.statut = "validé"';
     
+// Préparation de la requête
 $stmtAvis = $conn->prepare($sqlAvis);
 if($stmtAvis === false) {
     die('Erreur lors de la préparation de la requête : ' . $conn->error);
 }
     
+// Liaison du paramètre (ID_covoiturage) et exécution de la requête
 $stmtAvis->bind_param('i', $ID_covoiturage);
 $stmtAvis->execute();
 $resultAvis = $stmtAvis->get_result();
     
+// Vérification s'il y a des avis disponibles
 if ($resultAvis->num_rows > 0) { ?>
     <section class="splide">
         <div class="avis | splide__track | padding">
@@ -265,7 +284,11 @@ $conn->close(); ?>
 
 
 </body>
+
+<!-- Footer -->
 <?php include 'inc/footer.inc.php'; ?>
+
+<!-- JavaScript -->
 <script src="script/modal.js"></script>
 <script src="script/reveal-sections.js"></script>
 <script src="script/connexion.js"></script>

@@ -2,8 +2,8 @@
 $pageTitle = 'Contact';
 include 'inc/nav.inc.php';
 ?>
-
         <main class="main | padding">
+            <!-- Form de Contact -->
             <div class="contact | section">
                 <h1>Nous Contacter</h1>
                 <form class="contact-form" action="">
@@ -16,6 +16,7 @@ include 'inc/nav.inc.php';
             </div>
         </main>
 
+        <!-- Footer et JavaScript -->
         <?php include 'inc/footer.inc.php'; ?>
         <script src="script/script-itineraire.js"></script>
         <script src="script/modal.js"></script>
