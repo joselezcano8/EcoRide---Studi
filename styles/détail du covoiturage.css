@@ -114,10 +114,77 @@ strong {
     margin-left: 5px;
 }
 
-/**/
+/*Boutons Chauffeur*/
 .chauffeur-btns {
     display: flex;
     gap: 1rem;
 }
 
 /*Avis*/
+
+.donner-avis {
+    background-color: white;
+    position: fixed;
+    padding: 50px 50px 15px;
+    z-index: 1000;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    justify-self: center;
+    margin: auto;
+    bottom: 200px;
+    text-align: center;
+    font-family: var(--ff-secondary);
+}
+
+.donner-avis h2 {
+    margin-bottom: 1.5rem;
+}
+
+.donner-avis label {
+    color: var(--clr-dark-op);
+}
+
+.avis-container,
+.note {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.avis-container {
+    gap: 1.5rem;
+}
+
+#note {
+    margin-right: 1rem;
+}
+
+.range {
+    display: flex;
+    align-self: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.description textarea {
+    resize: none;
+    width: 20rem;
+    height: 6rem;
+    background-color: var(--clr-clear);
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+}
+
+.donner-avis img {
+    height: 25px;
+    margin-left: 5px;
+}
+
+.donner-avis .button {
+    align-self: center;
+    margin-bottom: 0.5rem;
+}

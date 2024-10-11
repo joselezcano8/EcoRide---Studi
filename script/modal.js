@@ -14,6 +14,10 @@ overlay.addEventListener('click', function(e) {
     overlay.classList.add('hidden');
     menu.classList.add('hidden');
     connexionMenu.classList.add('hidden')
+
+    if (avis) {
+        avis.classList.add('hidden')
+    }
 });
 
 closeModal.addEventListener('click', function(e) {
@@ -34,10 +38,13 @@ connexionBtn.forEach(btn =>
     overlay.classList.remove('hidden');
     connexionMenu.classList.remove('hidden');
 })
-)
+);
 
-connexionLink.addEventListener('click', function(e) {
-    connexionMenu.classList.remove('hidden');
-    menu.classList.add('hidden');
-})
+
+if (connexionLink) {
+    connexionLink.addEventListener('click', function(e) {
+        connexionMenu.classList.remove('hidden');
+        menu.classList.add('hidden');
+    })
+};
 

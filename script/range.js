@@ -8,8 +8,6 @@ input.addEventListener("input", (event) => {
   value.textContent = event.target.value;
 });
 
-console.log(btnFiltre);
-
 btnFiltre.addEventListener('click', function(e) {
   formFiltre.classList.toggle('hidden')
 })

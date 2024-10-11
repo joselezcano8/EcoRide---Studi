@@ -155,7 +155,7 @@ if($ID_covoiturage && $covoiturage): ?>
                         <button class="button">Annuler ma participation</button>
                     </form>
                 <?php elseif ($covoiturage['statut'] == 'terminé'): ?>
-                    <button class="button" style="justify-self: center;">Donner un avis</button>
+                    <button class="button  | avis-btn" style="justify-self: center;">Donner un avis</button>
                 <?php endif;
             elseif ($covoiturage['statut'] == 'programmé'): ?>
                     <form action="inc/covoiturage_action.php" method="POST"  style="justify-self: center;">
@@ -168,17 +168,44 @@ if($ID_covoiturage && $covoiturage): ?>
         <button class="button | connexion-btn" style="justify-self: center;">Participer</button>
     <?php endif; ?>
 
+    <!-- Donner Avis -->
+     <div class="donner-avis | hidden">
+        <form action="inc/donner_avis.php" method="POST" class="avis-form">
+        <h2>Laisser un avis</h2>
+        <div class="avis-container">
+            <div class="note">
+                <label for="note">Note: </label>
+                <div class="range">
+                    <input type="range" name="note" id="note" min="1" max="5" step="1" default="3">
+                    <p><output id="value"></output></p>
+                    <span><img src="img/svg/star.svg" alt="Star"></span>
+                </div>
+            </div>
+            <div class="description">
+                <label for="description">Description: </label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <input type="hidden" name="donner_avis" value="1">
+            <input type="hidden" name="chauffeur_id" value="<?php echo $chauffeurID; ?>">
+            <input type="hidden" name="utilisateur_id" value="<?php echo $userID; ?>">
+            <input type="hidden" name="covoiturage_id" value="<?php echo $ID_covoiturage; ?>">
+            <button type="submit" class="button">Donner avis</button>
+        </div>
+        </form>
+     </div>
+
 <?php
 $sqlAvis = '
 SELECT
 compte.pseudo,
 avis.description,
-avis.etoiles
+avis.etoiles,
+avis.statut
 FROM avis
 JOIN vehicule ON avis.ID_chauffeur = vehicule.ID_chauffeur
 JOIN compte ON avis.ID_passager = compte.ID
 JOIN covoiturage ON covoiturage.ID_vehicule = vehicule.ID_vehicule
-WHERE covoiturage.ID_covoiturage = ?';
+WHERE covoiturage.ID_covoiturage = ? AND avis.statut = "validé"';
     
 $stmtAvis = $conn->prepare($sqlAvis);
 if($stmtAvis === false) {
@@ -235,12 +262,26 @@ $conn->close(); ?>
 <script src="script/reveal-sections.js"></script>
 <script src="script/connexion.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="script/participer.js"></script>
 <script>
+        const avisBtn = document.querySelector('.avis-btn');
+        const avis = document.querySelector('.donner-avis')
+        const value = document.getElementById("value");
+        const input = document.getElementById("note");
         document.addEventListener( 'DOMContentLoaded', function() {
           var splide = new Splide( '.splide' );
           splide.mount();
         } );
+
+        value.textContent = input.value;
+        input.addEventListener("input", (event) => {
+            value.textContent = event.target.value;
+        });
+
+        avisBtn.addEventListener('click', function() {
+            overlay.classList.remove('hidden');
+            avis.classList.remove('hidden');
+
+        });
       </script>
 </body>
 </html>
