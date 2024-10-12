@@ -14,14 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Envoyer'])) {
     $stmt->bind_param('ssss', $nom, $prenom, $courriel, $message);
     
     if ($stmt->execute()) {
-        echo '<script>
-                alert("Votre message a été envoyé avec succès !");
-                window.location.href = "index.php";
-              </script>';
+        $paragraph = 'Votre message a été envoyé avec succès !';
+        $href = 'index.php';
+        $button = 'Redirection vers l\'accueil';
+        include 'inc/alert.inc.php';
     } else {
-        echo '<script>
-                alert("Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.");
-              </script>';
+        $paragraph = 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.';
+        $href = '';
+        $button = 'Ok';
+        include 'inc/alert.inc.php';
     };
 
     $stmt->close();
@@ -45,7 +46,6 @@ else echo 'aaaaaaaaa';
 
         <!-- Footer et JavaScript -->
         <?php include 'inc/footer.inc.php'; ?>
-        <script src="script/script-itineraire.js"></script>
         <script src="script/modal.js"></script>
         <script src="script/reveal-sections.js"></script>
         <script src="script/connexion.js"></script>

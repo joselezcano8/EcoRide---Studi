@@ -92,3 +92,7 @@
     justify-self: center;
 }
 
+.alert {
+    padding: 30px 50px !important;
+}
+

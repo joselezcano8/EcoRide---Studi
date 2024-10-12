@@ -13,15 +13,17 @@ const alertBtn = document.querySelector('.alert-btn');
 const alertContainer = document.querySelector('.alert');
 
 //Close Menus
-overlay.addEventListener('click', function(e) {
-    overlay.classList.add('hidden');
+if (overlay) {
+    overlay.addEventListener('click', function(e) {
+        overlay.classList.add('hidden');
     menu.classList.add('hidden');
     connexionMenu.classList.add('hidden')
-
+    
     if (avis) {
         avis.classList.add('hidden')
     }
 });
+}
 
 
 if (closeModal) {

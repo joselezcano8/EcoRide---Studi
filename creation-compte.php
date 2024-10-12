@@ -31,11 +31,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param('sss', $courriel, $pseudo, $hashedPassword);
 
 
-
                 if ($stmt->execute()) {
                     $paragraph = 'Compte créé avec succès ! Redirection vers la page d\'accueil...';
                     $href = 'index.php';
-                    $button = 'Redirection vers la page d\'accueil';
+                    $button = 'Redirection vers l\'accueil';
                     include 'inc/alert.inc.php';
                 } else {
                     $paragraph = 'Une erreur est survenue. Veuillez réessayer plus tard..';
@@ -88,19 +87,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Creation de compte</h1>
             <div>
                 <label for="adresse-mail">Veulliez sauisir votre adresse mail</label>
-                <input type="email" name="adresse-mail" id="adresse-mail" placeholder="adresse@exemple.com">
+                <input type="email" name="adresse-mail" id="adresse-mail" placeholder="adresse@exemple.com" required>
             </div>
             <div>
                 <label for="pseudo">Saisir un pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" placeholder="pseudo_exemple123">
+                <input type="text" name="pseudo" id="pseudo" placeholder="pseudo_exemple123" required>
             </div>
             <div>
                 <label for="password-creation">Choisissez un mot de passe</label>
-                <input type="password" name="password-creation" id="password-creation" placeholder="**********">
+                <input type="password" name="password-creation" id="password-creation" placeholder="**********" required>
             </div>
             <div>
                 <label for="password-repeat">Répéter le mot de passe</label>
-                <input type="password" name="password-repeat" id="password-repeat" placeholder="**********">
+                <input type="password" name="password-repeat" id="password-repeat" placeholder="**********" required>
+            </div>
+            <div class="exigences">
+                <p class="exigences-crt">Le mot de passe doit contenir au moins 8 caractères. ❌</p>
+                <p class="exigences-maj">Il doit inclure au moins une lettre majuscule. ❌</p>
+                <p class="exigences-spc">Un caractère spécial est requis. ❌</p>
+                <p class="exigences-chf">Il doit également comporter au moins un chiffre. ❌</p>
             </div>
 
             <input type="submit" value="S'inscrire" class="button">
@@ -111,5 +116,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'inc/footer.inc.php'; ?>
     <script src="script/reveal-sections.js"></script>
     <script src="script/modal.js"></script>
+    <script src="script/password.js"></script>
 </body>
 </html>
