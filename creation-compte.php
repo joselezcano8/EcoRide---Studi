@@ -1,3 +1,63 @@
+<?php 
+
+include 'inc/config.php';
+
+$response = ['success' => false, 'error' => ''];
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $courriel = filter_var(trim($_POST['adresse-mail']), FILTER_SANITIZE_EMAIL);
+    $pseudo = trim($_POST['pseudo']);
+    $password = trim($_POST['password-creation']);
+    $passwordRepeat = trim($_POST['password-repeat']);
+
+    $stmt = $conn->prepare('SELECT * FROM compte WHERE courriel = ? OR pseudo = ?');
+    $stmt->bind_param('ss', $email, $pseudo);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $paragraph = '';
+    $href = '#';
+    $button = 'Ok';
+
+    if ($result->num_rows > 0) {
+        $paragraph = 'Ce pseudonyme ou email est déjà utilisé. Veuillez en choisir un autre.';
+        include 'inc/alert.inc.php';
+    } else {
+        if ($password === $passwordRepeat) {
+            if (preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $password)) {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                $stmt = $conn->prepare('INSERT INTO compte (courriel, pseudo, mot_de_passe) VALUES (?, ?, ?)');
+                $stmt->bind_param('sss', $courriel, $pseudo, $hashedPassword);
+
+
+
+                if ($stmt->execute()) {
+                    $paragraph = 'Compte créé avec succès ! Redirection vers la page d\'accueil...';
+                    $href = 'index.php';
+                    $button = 'Redirection vers la page d\'accueil';
+                    include 'inc/alert.inc.php';
+                } else {
+                    $paragraph = 'Une erreur est survenue. Veuillez réessayer plus tard..';
+                    include 'inc/alert.inc.php';
+                }
+            } else {
+                    $paragraph = 'Le mot de passe doit contenir au moins 8 caractères, un caractère spécial, une lettre majuscule et un chiffre.';
+                    include 'inc/alert.inc.php';
+            }
+        } else {
+            $paragraph = 'Les mots de passe ne correspondent pas';
+            include 'inc/alert.inc.php';
+        }
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +84,7 @@
     
     <!-- Form de creation de compte -->
     <main class="creation-compte | section">
-        <form action="" class="form-cration-compte">
+        <form action="" class="form-cration-compte" method="POST">
         <h1>Creation de compte</h1>
             <div>
                 <label for="adresse-mail">Veulliez sauisir votre adresse mail</label>
@@ -50,5 +110,6 @@
     <!-- Footer et JavaScript -->
     <?php include 'inc/footer.inc.php'; ?>
     <script src="script/reveal-sections.js"></script>
+    <script src="script/modal.js"></script>
 </body>
 </html>

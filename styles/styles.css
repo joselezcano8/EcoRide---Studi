@@ -300,8 +300,10 @@ svg {
   }
 }
 
+
 /*Menu connexion*/
-.connexion-menu {
+.connexion-menu,
+.alert {
   display: flex;
   flex-direction: column;
   justify-content: center;
