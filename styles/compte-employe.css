@@ -1,0 +1,72 @@
+.main {
+    padding-top: 200px !important;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main h1 {
+    font-family: var(--ff-primary);
+    color: var(--clr-dark);
+    font-size: var(--fs-primary-heading);
+    font-weight: var(--fw-semi-bold);
+    margin-bottom: 1rem;
+}
+
+.table-container {
+    display: grid;
+    grid-template-columns: 10% 11% 10% 9% 10% 10% 20% 10% 10%;
+    text-align: left;
+    background-color: var(--clr-clear);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.actions {
+    grid-column-start: 8;
+    grid-column-end: 10;
+}
+
+.table-header {
+    font-family: var(--ff-secondary);
+    background-color: var(--clr-primary);
+    color: var(--clr-clear);
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.table-cell {
+    font-family: var(--ff-secondary);
+    color: var(--clr-dark-bg);
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.table-cell-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.table-cell-button button{
+    margin: auto;
+}
+
+.button-valider {
+    background-color: #4CAF50;
+}
+
+.button-valider:hover {
+    background-color: #3b863e;
+}
+
+.button-refuser {
+    background-color: #f44336;
+}
+
+.button-refuser:hover {
+    background-color: #b93228;
+}
+
+

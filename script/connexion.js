@@ -14,7 +14,9 @@ document.getElementById('connexion-form').addEventListener('submit', function(e)
     .then(data => {
         // Si la connexion réussit, recharger la page
         if (data.success) {
-            location.reload();
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            }
         } else {
             // Sinon, afficher un message d'erreur
             document.getElementById('error-message').textContent = data.error;

@@ -26,8 +26,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $user['ID'];
             $_SESSION['user_mail'] = $user['courriel'];
             $_SESSION['pseudo'] = $user['pseudo'];
+            $_SESSION['role'] = $user['role'];
             
-            echo json_encode(['success' => true]);
+            // Redirige en fonction du rôle de l'utilisateur
+            if ($_SESSION['role'] === 'Employé') {
+                echo json_encode(['success' => true, 'redirect' => 'private/compte-employe.php']);
+            } else {
+                echo json_encode(['success' => true, 'redirect' => '']);
+            }
         } else {
             // Mot de passe incorrect
             echo json_encode(['success' => false, 'error' => 'Mot de passe incorrect.']);
