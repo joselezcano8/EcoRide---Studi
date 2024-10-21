@@ -34,23 +34,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $paragraph = "L'avis a été " . ($action === 'valider' ? "validé" : "rejeté") . " avec succès.";
             include '../inc/alert.inc.php';
+
+            if ($action === 'valider') {
+                $stmt = $conn->prepare('SELECT ID_chauffeur FROM avis WHERE ID_avis = ?');
+                $stmt->bind_param('i', $avis_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $chauffeur_id = $result->fetch_assoc()['ID_chauffeur'];
+                $stmt->close();
+
+                mettreAJourNoteChauffeur($chauffeur_id, $conn);
+            }
+
         } else {
             $paragraph = "Erreur lors de la mise à jour de l'avis.";
             include '../inc/alert.inc.php';
         }
-            $stmt->close();
-        } else {
+    } else {
             $paragraph = "Données invalides";
             include '../inc/alert.inc.php';
-        }
     }
+}
+
+function mettreAJourNoteChauffeur($chauffeur_id, $conn) {
+    $stmt = $conn->prepare('SELECT AVG(etoiles) AS note_moyenne FROM avis WHERE ID_chauffeur = ? AND statut = "validé"');
+    $stmt->bind_param('i', $chauffeur_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $note_moyenne = $result->fetch_assoc()['note_moyenne'];
+    $stmt->close();
+
+    $note_moyenne_arrondie = round($note_moyenne);
+
+    $stmt = $conn->prepare('UPDATE chauffeur SET note = ? WHERE ID = ?');
+    $stmt->bind_param('ii', $note_moyenne_arrondie, $chauffeur_id);
+    $stmt->execute();
+    $stmt->close();
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide &bull; Page Employé</title>
+    <title>EcoRide &bull; Page Employée</title>
     <!--Font Roboto-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

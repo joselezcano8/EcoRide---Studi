@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $resultLog->fetch_assoc();
         
         // Vérifier si le mot de passe est correct
-        if ($connexion_password === $user['mot_de_passe']) {
+        if (password_verify($connexion_password, $user['mot_de_passe'])) {
             // Enregistrer les informations de l'utilisateur dans la session
             $_SESSION['user_id'] = $user['ID'];
             $_SESSION['user_mail'] = $user['courriel'];

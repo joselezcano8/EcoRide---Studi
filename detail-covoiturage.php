@@ -138,8 +138,8 @@ if($ID_covoiturage && $covoiturage): ?>
             $isChauffeur = ($userID == $chauffeurID);
 
             // Vérifier si l'utilisateur a déjà donné un avis
-            $stmtAvis = $conn->prepare('SELECT COUNT(*) FROM avis WHERE ID_passager = ? AND ID_chauffeur = ?');
-            $stmtAvis->bind_param('ii', $userID, $chauffeurID);
+            $stmtAvis = $conn->prepare('SELECT COUNT(*) FROM avis WHERE ID_passager = ? AND ID_chauffeur = ? AND ID_covoiturage = ?');
+            $stmtAvis->bind_param('iii', $userID, $chauffeurID, $ID_covoiturage);
             $stmtAvis->execute();
             $stmtAvis->bind_result($count);
             $stmtAvis->fetch();
@@ -206,7 +206,7 @@ if($ID_covoiturage && $covoiturage): ?>
             </div>
             <div class="description">
                 <label for="description">Description: </label>
-                <textarea name="description" id="description"></textarea>
+                <textarea name="description" id="description" required></textarea>
             </div>
             <input type="hidden" name="donner_avis" value="1">
             <input type="hidden" name="chauffeur_id" value="<?php echo $chauffeurID; ?>">

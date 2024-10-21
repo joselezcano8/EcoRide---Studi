@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwordRepeat = trim($_POST['password-repeat']);
 
     $stmt = $conn->prepare('SELECT * FROM compte WHERE courriel = ? OR pseudo = ?');
-    $stmt->bind_param('ss', $email, $pseudo);
+    $stmt->bind_param('ss', $courriel, $pseudo);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -30,19 +30,29 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $conn->prepare('INSERT INTO compte (courriel, pseudo, mot_de_passe) VALUES (?, ?, ?)');
                 $stmt->bind_param('sss', $courriel, $pseudo, $hashedPassword);
 
-
                 if ($stmt->execute()) {
-                    $paragraph = 'Compte créé avec succès ! Redirection vers la page d\'accueil...';
-                    $href = 'index.php';
-                    $button = 'Redirection vers l\'accueil';
-                    include 'inc/alert.inc.php';
+                    $compteID = $conn->insert_id;
+                    
+                    $stmt2 = $conn->prepare('INSERT INTO utilisateur (ID) VALUES (?)');
+                    $stmt2->bind_param('i', $compteID);
+
+                    if ($stmt2->execute()) {
+                        $paragraph = 'Compte créé avec succès ! Redirection vers la page d\'accueil...';
+                        $href = 'index.php';
+                        $button = 'Redirection vers l\'accueil';
+                    } else {
+                        $paragraph = 'Une erreur est survenue lors de la création de l\'utilisateur. Veuillez réessayer plus tard.';
+                    }
+                    
+                    $stmt2->close();
                 } else {
-                    $paragraph = 'Une erreur est survenue. Veuillez réessayer plus tard..';
-                    include 'inc/alert.inc.php';
+                    $paragraph = 'Une erreur est survenue. Veuillez réessayer plus tard.';
                 }
+                
+                include 'inc/alert.inc.php';
             } else {
-                    $paragraph = 'Le mot de passe doit contenir au moins 8 caractères, un caractère spécial, une lettre majuscule et un chiffre.';
-                    include 'inc/alert.inc.php';
+                $paragraph = 'Le mot de passe doit contenir au moins 8 caractères, un caractère spécial, une lettre majuscule et un chiffre.';
+                include 'inc/alert.inc.php';
             }
         } else {
             $paragraph = 'Les mots de passe ne correspondent pas';
@@ -53,8 +63,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
-
 ?>
+
 
 
 <!DOCTYPE html>
