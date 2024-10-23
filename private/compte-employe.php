@@ -73,36 +73,11 @@ function mettreAJourNoteChauffeur($chauffeur_id, $conn) {
 
 }
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide &bull; Page Employée</title>
-    <!--Font Roboto-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <!--Font Noto Sans-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <!-- Styles -->
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/compte-employe.css">
-    </head>
-    <body>
-        <header>
-            <!-- Section de la barre de navigation -->
-            <nav class="nav | padding">
-                    <img class="logo" src="../img/logo_primary.png" alt="Logo EcoRide">
-                    <form action="../inc/logout.php" method="POST">
-                        <button type="submit" class="button">Déconnexion</button>
-                    </form>
-            </nav>
-        </header>
+$pageTitle = 'Page Employée';
+$pageCss = 'compte-employe';
+include '../inc/nav.inc.employe.php'
 
+?>
         <main class="main | padding">
             <h1>Espace Employé</h1>
             <h2>Gestion d'avis</h2>

@@ -31,7 +31,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirige en fonction du rôle de l'utilisateur
             if ($_SESSION['role'] === 'Employé') {
                 echo json_encode(['success' => true, 'redirect' => 'private/compte-employe.php']);
-            } else {
+            } elseif ($_SESSION['role'] === 'Administrateur') {
+                echo json_encode(['success' => true, 'redirect' => 'private/compte-administrateur.php']);
+            }            
+            else {
                 echo json_encode(['success' => true, 'redirect' => '']);
             }
         } else {

@@ -1,0 +1,20 @@
+body {
+    background-color: white !important;
+}
+
+.graphiques {
+    margin-top: 10rem;
+    padding: 0px 200px !important;
+}
+
+.chart {
+    margin-bottom: 10rem;
+}
+
+.chart h2 {
+    margin-bottom: 2rem;
+}
+
+.chart .totalCredits {
+    margin-top: 1rem;
+}
