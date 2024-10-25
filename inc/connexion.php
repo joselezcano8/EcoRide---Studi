@@ -22,20 +22,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Vérifier si le mot de passe est correct
         if (password_verify($connexion_password, $user['mot_de_passe'])) {
-            // Enregistrer les informations de l'utilisateur dans la session
-            $_SESSION['user_id'] = $user['ID'];
-            $_SESSION['user_mail'] = $user['courriel'];
-            $_SESSION['pseudo'] = $user['pseudo'];
-            $_SESSION['role'] = $user['role'];
-            
-            // Redirige en fonction du rôle de l'utilisateur
-            if ($_SESSION['role'] === 'Employé') {
-                echo json_encode(['success' => true, 'redirect' => 'private/compte-employe.php']);
-            } elseif ($_SESSION['role'] === 'Administrateur') {
-                echo json_encode(['success' => true, 'redirect' => 'private/compte-administrateur.php']);
-            }            
-            else {
-                echo json_encode(['success' => true, 'redirect' => '']);
+
+            if ($user['role'] === 'Suspendu') {
+                echo json_encode(['success' => false, 'error' => 'Votre compte est suspendu.']);
+            } else {
+                // Enregistrer les informations de l'utilisateur dans la session
+                $_SESSION['user_id'] = $user['ID'];
+                $_SESSION['user_mail'] = $user['courriel'];
+                $_SESSION['pseudo'] = $user['pseudo'];
+                $_SESSION['role'] = $user['role'];
+                
+                // Redirige en fonction du rôle de l'utilisateur
+                if ($_SESSION['role'] === 'Employé') {
+                    echo json_encode(['success' => true, 'redirect' => 'private/compte-employe.php']);
+                } elseif ($_SESSION['role'] === 'Administrateur') {
+                    echo json_encode(['success' => true, 'redirect' => 'private/compte-administrateur.php']);
+                }            
+                else {
+                    echo json_encode(['success' => true, 'redirect' => '']);
+                }
             }
         } else {
             // Mot de passe incorrect

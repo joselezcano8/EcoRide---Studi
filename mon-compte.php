@@ -75,7 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_vehicule'])) {
     // Insertion du véhicule dans la base de données
     $stmt = $conn->prepare('INSERT INTO vehicule (ID_chauffeur, plaque, date_plaque, marque, modele, couleur, nombre_de_places, fumeur, animaux, preferences, eco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->bind_param('isssssiiisi', $ID, $plaque, $date_plaque, $marque, $modele, $couleur, $nombre_de_places, $fumeur, $animaux, $preferences, $eco);
-    $stmt->execute();
+    /* $stmt->execute();
+    $stmt->close(); */
+    if ($stmt->execute()) {
+        $href = '';
+        $button = 'Ok';
+        $paragraph = 'Vehicule ajouté avec succés!';
+        include 'inc/alert.inc.php';
+    }
     $stmt->close();
 }
 
@@ -104,8 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajouter_trajet'])) {
     $statut = 'programmé';
     $stmtTrajet->bind_param('isssssisi', $vehicule_id, $adresse_depart, $adresse_arrivee, $heure_depart, $heure_arrivee, $date, $prix, $statut, $places_disponibles);
 
-
-    if (!$stmtTrajet->execute()) {
+    if ($stmtTrajet->execute()) {
+        $href = '';
+        $button = 'Ok';
+        $paragraph = 'Trajet ajouté avec succés!';
+        include 'inc/alert.inc.php';
+    }else {
         echo "Erreur lors de l'ajout du trajet : " . $stmtTrajet->error;
     }
     $stmtTrajet->close();
