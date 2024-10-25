@@ -47,6 +47,7 @@ input{
     padding: 5px !important;
     border-radius: 15px;
     font-family: var(--ff-secondary) !important;
+    color: var(--clr-dark-bg) !important;
 }
 
 .button {

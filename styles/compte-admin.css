@@ -2,6 +2,15 @@ body {
     background-color: white !important;
 }
 
+.main h1 {
+    text-align: center;
+    margin-top: 200px;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-primary-heading);
+    font-weight: var(--fw-semi-bold);
+    color: var(--clr-dark);
+}
+
 .graphiques {
     margin-top: 10rem;
     padding: 0px 200px !important;
@@ -11,10 +20,92 @@ body {
     margin-bottom: 10rem;
 }
 
-.chart h2 {
-    margin-bottom: 2rem;
+h2 {
+    margin-bottom: 2rem !important;
+    font-size: 1.75rem !important;
 }
 
 .chart .totalCredits {
     margin-top: 1rem;
+}
+
+.creation-comptes {
+    background-color: var(--clr-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.creation-comptes p {
+    color: var(--clr-clear) !important;
+}
+
+.creation-comptes h2 {
+    color: var(--clr-clear);
+    font-size: 1.75rem !important;
+    text-align: center;
+}
+
+.form-creation-compte {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-creation-compte input:not(.button) {
+    background-color: var(--clr-clear);
+    height: 2rem;
+    border: none;
+    padding: 5px !important;
+    border-radius: 15px;
+    font-family: var(--ff-secondary) !important;
+    color: var(--clr-dark-bg) !important;
+}
+
+.form-creation-compte div {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.form-creation-compte .button {
+    margin-top: 1rem;
+    align-self: center;
+    background-color: var(--clr-clear);
+    color: var(--clr-primary);
+}
+
+.form-creation-compte .button:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-clear);
+}
+
+.suspendre-compte {
+    padding: 3rem;
+    background-color: var(--clr-clear);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.suspendre-compte-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.suspendre-compte input[type=number] {
+    height: 2rem;
+    width: 5rem;
+    border: none;
+    padding: 5px !important;
+    border-radius: 15px;
+    font-family: var(--ff-secondary) !important;
+    color: var(--clr-dark-bg) !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }

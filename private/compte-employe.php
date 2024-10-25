@@ -1,5 +1,10 @@
 <?php session_start(); 
 
+if ($_SESSION['role'] !== 'Employé') {
+    header('Location: ../index.php');
+    exit;
+}
+
 include '../inc/config.php';
 
 $stmt = $conn->prepare('SELECT

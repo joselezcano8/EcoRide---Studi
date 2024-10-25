@@ -1,5 +1,17 @@
 <?php 
 
+session_start();
+
+if ($_SESSION) {
+    if ($_SESSION['role'] === 'Administrateur') {
+        header('Location: private/compte-administrateur.php');
+        exit;
+    } elseif ($_SESSION['role'] === 'Employé') {
+        header('Location: private/compte-employe.php');
+        exit;
+    }
+}
+
 include 'inc/config.php';
 
 $response = ['success' => false, 'error' => ''];

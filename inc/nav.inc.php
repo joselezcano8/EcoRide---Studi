@@ -1,4 +1,16 @@
-<?php session_start(); ?>
+<?php session_start();
+
+if ($_SESSION) {
+    if ($_SESSION['role'] === 'Administrateur') {
+        header('Location: private/compte-administrateur.php');
+        exit;
+    } elseif ($_SESSION['role'] === 'Employé') {
+        header('Location: private/compte-employe.php');
+        exit;
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
