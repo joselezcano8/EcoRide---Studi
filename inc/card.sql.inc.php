@@ -85,6 +85,7 @@ JOIN
     Compte compte ON chauffeur.ID = compte.ID
 WHERE
     c.statut = "programme"
+    AND c.date >= CURDATE()
 ';
 
 $params = []; // Tableau pour stocker les paramètres de la requête

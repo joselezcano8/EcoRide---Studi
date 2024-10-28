@@ -27,6 +27,25 @@ $stmt->close();
 if($action && $ID_covoiturage) {
     switch($action) {
         case 'participer': // Participer au covoiturage
+
+        // Récupérer le prix du covoiturage
+        $stmt = $conn->prepare('SELECT prix FROM covoiturage WHERE ID_covoiturage = ?');
+        $stmt->bind_param('i', $ID_covoiturage);
+        $stmt->execute();
+        $stmt->bind_result($prixCovoiturage);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Récupérer les crédits de l'utilisateur
+        $stmt = $conn->prepare('SELECT credits FROM utilisateur WHERE ID = ?');
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $stmt->bind_result($userCredits);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Vérifier si l'utilisateur a suffisamment de crédits pour participer
+        if ($userCredits >= $prixCovoiturage) {
             if ($places_disponibles > 0) {
                 // Décrémenter le nombre de places disponibles
                 $new_places_disponibles = $places_disponibles - 1;
@@ -41,7 +60,12 @@ if($action && $ID_covoiturage) {
                 $stmt->execute();
                 $stmt->close();
             }
-            break;
+            } else {
+                // Rediriger avec un message d'erreur si les crédits sont insuffisants
+                header('Location: ../detail-covoiturage.php?ID_covoiturage=' . $ID_covoiturage . '&error=insufficient_credits');
+                exit;
+            }
+        break;
 
         case 'annuler_participation': // Annuler la participation
             // Incrémenter le nombre de places disponibles
@@ -66,7 +90,40 @@ if($action && $ID_covoiturage) {
         case 'terminer': // Marquer le covoiturage comme "terminé"
             $stmt = $conn->prepare("UPDATE covoiturage SET statut = 'terminé' WHERE ID_covoiturage = ?");
             $stmt->bind_param('i', $ID_covoiturage);
-            $stmt->execute();
+            if ($stmt->execute()) {
+                $sql = "SELECT c.prix, v.ID_chauffeur FROM covoiturage c JOIN vehicule v ON c.ID_vehicule = v.ID_vehicule WHERE c.ID_covoiturage = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('i', $ID_covoiturage);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $covoiturage = $result->fetch_assoc();
+                    $chauffeurID = $covoiturage['ID_chauffeur'];
+                    $prixCovoiturage = $covoiturage['prix'];
+
+                    $sql = "SELECT ID_utilisateur FROM participants WHERE ID_covoiturage = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('i', $ID_covoiturage);
+                    $stmt->execute();
+                    $participants = $stmt->get_result();
+
+                    $totalParticipants = $participants->num_rows;
+                    $reductionParticipant = $prixCovoiturage;
+                    $creditChauffeur = ($prixCovoiturage - 2) * $totalParticipants;
+
+                    while ($participant = $participants->fetch_assoc()) {
+                        $participantID = $participant['ID_utilisateur'];
+                        $stmtUpdate = $conn->prepare("UPDATE utilisateur SET credits = credits - ? WHERE ID = ?");
+                        $stmtUpdate->bind_param('di', $reductionParticipant, $participantID);
+                        $stmtUpdate->execute();
+                    }
+
+                    $stmtUpdate = $conn->prepare("UPDATE utilisateur SET credits = credits + ? WHERE ID = ?");
+                    $stmtUpdate->bind_param('di', $creditChauffeur, $chauffeurID);
+                    $stmtUpdate->execute();
+                }
+            }
             break;
     
         case 'annuler': // Annuler le covoiturage

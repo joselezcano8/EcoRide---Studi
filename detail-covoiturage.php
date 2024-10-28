@@ -19,6 +19,13 @@ else {
     echo('<p>ID covoiturage invalide</p>');
 }
 
+if (isset($_GET['error']) && $_GET['error'] === 'insufficient_credits') {
+    $paragraph = 'Crédits insuffisants';
+    $button = 'Ok';
+    $href = 'detail-covoiturage.php?ID_covoiturage=' . $ID_covoiturage;
+    include 'inc/alert.inc.php';
+}
+
 // Requête pour récupérer les détails du covoiturage
 $sql = '
 SELECT
