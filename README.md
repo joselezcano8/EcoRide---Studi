@@ -1,0 +1,13 @@
+Pour le projet EcoRide, j'ai mis en place un environnement de développement local en utilisant XAMPP, une solution simple et pratique pour installer Apache, MySQL et PHP sur mon ordinateur. Cela m'a permis de travailler en local et de tester le site avant de le déployer en ligne. Pour gérer la base de données, j’ai utilisé phpMyAdmin, un outil graphique intuitif qui m'a facilité la création et la gestion des tables.
+
+J'ai choisi PHP pour le développement du backend, car c'est le langage que l’on m’a enseigné durant ma formation et je me sens à l’aise avec. PHP est parfaitement adapté pour construire des applications web dynamiques et interagir avec une base de données MySQL. Grâce à Git et GitHub, j’ai pu gérer le code source de manière structurée, suivre l’évolution du projet et garder une trace de toutes les modifications apportées. GitHub a également facilité la collaboration et la gestion des versions, ce qui est crucial pour suivre l’avancement du projet.
+
+Pour l’organisation du projet, j'ai utilisé Notion. Cet outil m’a permis de centraliser toutes les informations importantes, comme le cahier des charges, les spécifications fonctionnelles et les tâches à accomplir. Il m’a aussi aidé à garder une vision claire du projet et à structurer mon travail de manière efficace.
+
+Le design du site a été réalisé avec Figma, où j'ai créé des maquettes interactives pour simuler l'expérience utilisateur et tester l’ergonomie du site avant de passer au développement. Figma m’a également permis de créer des composants réutilisables, garantissant une cohérence visuelle tout au long du projet. Une fois les maquettes validées, j'ai traduit le design en code, en veillant à ce que l'interface soit fidèle aux prototypes.
+
+Concernant la structure du projet, j'ai organisé les fichiers de manière logique : le dossier /htdocs/ contient les pages PHP, /inc/ regroupe la logique backend, /styles/ contient les fichiers CSS et /scripts/ ceux en JavaScript. Cette organisation m’a permis de travailler de manière fluide et d’assurer une gestion claire du code.
+
+Enfin, après avoir développé le projet en local, je l’ai déployé sur Hostinger, ce qui m’a permis de tester l’application dans un environnement de production et de m’assurer de son bon fonctionnement en ligne.
+
+En résumé, l'utilisation de XAMPP, phpMyAdmin, Git, GitHub, Notion, et Figma m’a permis de gérer efficacement le développement de EcoRide. Ces outils m’ont aidé à structurer le projet, à suivre son évolution, à organiser le travail et à créer une interface utilisateur optimale, tout en garantissant une gestion fluide du code tout au long du processus.
