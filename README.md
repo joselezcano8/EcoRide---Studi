@@ -27,3 +27,15 @@ htdocs/
 │   ├── styles/        # Fichiers CSS pour le design
 │   ├── script/        # Scripts JavaScript pour les interactions dynamiques
 │   ├── database.sql   # Fichier SQL pour la création des tables
+```
+## 🎯 Justification des choix  
+
+### ✅ Facilité d’installation et compatibilité  
+- XAMPP permet un développement local rapide sans configuration complexe.  
+- PHP et MySQL sont largement documentés et compatibles avec les besoins du projet.  
+
+### 🔄 Gestion efficace des versions  
+- GitHub facilite le suivi des modifications et la collaboration éventuelle avec d’autres développeurs.  
+
+## 🚀 Déploiement  
+Le projet est actuellement hébergé sur **Hostinger**, une solution économique et performante qui supporte PHP et MySQL.  
