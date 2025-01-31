@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Envoyer'])) {
 
     $stmt->close();
 }
-else echo 'aaaaaaaaa';
 
 ?>
         <main class="main | padding">
